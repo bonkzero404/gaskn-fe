@@ -1,9 +1,14 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
-import useLocalStorage from "../../components/hook/localstorage";
+import useLocalStorage from "../../../components/hook/localstorage";
+import { useShouldSetSession } from "../../../components/hook/auth";
 import { Repository } from "./repository";
-import { SignIn } from "./ui";
+import { SignIn } from "./signin";
 
-export const Interactor = (): JSX.Element => {
+const SignInPage = (): JSX.Element => {
+  const repository = new Repository();
+  const router = useRouter();
+  const [_sessionToken, SetSession] = useShouldSetSession();
   const [showAlert, setShowAlert] = useState(false);
   const [alertType, setAlertType] = useState("danger");
   const [showSubmitErrorMessage, setShowSubmitErrorMessage] = useState("");
@@ -22,7 +27,7 @@ export const Interactor = (): JSX.Element => {
     password: string;
     rememberme?: boolean;
   }): Promise<boolean> => {
-    const reqData = await Repository.Auth({
+    const reqData = await repository.authenticate({
       email: data.email,
       password: data.password,
     });
@@ -51,6 +56,14 @@ export const Interactor = (): JSX.Element => {
     setAlertType("success");
     setShowSubmitErrorMessage("Authentication successful");
     setShowAlert(true);
+
+    SetSession({
+      token: reqData?.data?.token,
+      expires: reqData?.data?.expires,
+    });
+
+    setTimeout(() => router.replace("/panel/dashboard"), 500);
+
     return false;
   };
 
@@ -68,3 +81,5 @@ export const Interactor = (): JSX.Element => {
     />
   );
 };
+
+export default SignInPage;

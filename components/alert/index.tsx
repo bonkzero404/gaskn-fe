@@ -21,7 +21,7 @@ export const Alert = (props: AlertProperty) => {
     if (props.type === "success") {
       setAlertColor("green");
     }
-  }, [props]);
+  }, [props.type]);
 
   return props.show ? (
     <div
@@ -41,4 +41,8 @@ export const Alert = (props: AlertProperty) => {
   ) : (
     <></>
   );
+};
+
+Alert.getInitialProps = (props: AlertProperty) => {
+  props.type = "info";
 };

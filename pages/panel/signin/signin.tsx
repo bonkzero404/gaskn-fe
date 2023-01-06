@@ -1,12 +1,12 @@
 import { AtSymbolIcon, LockClosedIcon } from "@heroicons/react/20/solid";
-import { Input } from "../../components/input";
-import { Button } from "../../components/button";
-import { LayoutAuth } from "../../components/layout/auth";
+import { Input } from "../../../components/input";
+import { Button } from "../../../components/button";
+import { LayoutAuth } from "../../../components/layout/auth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { ValidationSchema } from "./validation";
-import { Alert } from "../../components/alert";
+import { Alert } from "../../../components/alert";
 
 interface props {
   formSubmit: (data: any) => Promise<boolean>;
