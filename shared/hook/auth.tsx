@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useCallback } from "react";
 import useLocalStorage from "./localstorage";
-import { useEventCallback, useEventListener } from "usehooks-ts";
+import { useEventCallback } from "usehooks-ts";
 
 type sessionState = {
   token: string;

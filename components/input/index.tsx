@@ -16,7 +16,7 @@ export const Input = (props: InputProperties) => {
       padLeft = "pl-10";
       return (
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          {props.icon}
+          {props.icon(props.validationMessages ? true : false)}
         </div>
       );
     }
@@ -32,17 +32,33 @@ export const Input = (props: InputProperties) => {
           {showPass ? (
             <EyeIcon
               className={`h-6 font-extralight text-${
-                props.focusBorderColor ? props.focusBorderColor : "blue"
+                props.validationMessages
+                  ? "red"
+                  : props.borderColor
+                  ? props.borderColor
+                  : "blue"
               }-500 group-hover:text-${
-                props.focusBorderColor ? props.focusBorderColor : "blue"
+                props.validationMessages
+                  ? "red"
+                  : props.borderColor
+                  ? props.borderColor
+                  : "blue"
               }-400`}
             />
           ) : (
             <EyeSlashIcon
               className={`h-6 font-extralight text-${
-                props.focusBorderColor ? props.focusBorderColor : "blue"
+                props.validationMessages
+                  ? "red"
+                  : props.borderColor
+                  ? props.borderColor
+                  : "blue"
               }-500 group-hover:text-${
-                props.focusBorderColor ? props.focusBorderColor : "blue"
+                props.validationMessages
+                  ? "red"
+                  : props.borderColor
+                  ? props.borderColor
+                  : "blue"
               }-400`}
             />
           )}

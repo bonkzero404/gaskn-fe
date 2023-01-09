@@ -1,13 +1,13 @@
 import { HTMLInputTypeAttribute } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
-import { SolidColor } from "../color";
+import { SolidColor } from "../../shared/color";
 
 export interface InputProperties {
   id?: string | undefined;
   name: string | undefined;
   type?: HTMLInputTypeAttribute | undefined;
   eyePassword?: boolean | undefined;
-  icon?: JSX.Element | undefined;
+  icon?: (isErr: boolean) => JSX.Element | undefined;
   width?: string | undefined;
   placeholder?: string | undefined;
   autoComplete?: string | undefined;

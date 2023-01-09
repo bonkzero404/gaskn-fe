@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { AuthLayoutProps } from "./props";
 
-export const LayoutAuth = ({ children }: { children: JSX.Element }) => {
+export const LayoutAuth = (props: AuthLayoutProps) => {
   // @ts-ignore
   const logoApp = ({ src }) => {
     return `https://tailwindui.com/img/logos/${src}?color=indigo&shade=600`;
@@ -19,11 +20,11 @@ export const LayoutAuth = ({ children }: { children: JSX.Element }) => {
             height={200}
           />
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            Sign in to your account
+            {props.title}
           </h2>
         </div>
         <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
-          {children}
+          {props.children}
         </div>
       </div>
     </div>

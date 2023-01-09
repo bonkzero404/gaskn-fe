@@ -24,7 +24,9 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
 
     try {
       const item = window.localStorage.getItem(key);
-      return item ? (parseJSON(item) as T) : initialValue;
+      return item
+        ? ((isJsonString(item) ? parseJSON(item) : item) as T)
+        : initialValue;
     } catch (error) {
       console.warn(`Error reading localStorage key “${key}”:`, error);
       return initialValue;
@@ -42,7 +44,11 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
     try {
       const newValue = value instanceof Function ? value(storedValue) : value;
 
-      window.localStorage.setItem(key, JSON.stringify(newValue));
+      if (isJson(newValue)) {
+        window.localStorage.setItem(key, JSON.stringify(newValue));
+      } else {
+        window.localStorage.setItem(key, newValue as string);
+      }
 
       setStoredValue(newValue);
 
@@ -72,11 +78,23 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T>] {
   return [storedValue, setValue];
 }
 
+function isJson<T>(val: Object | T): boolean {
+  return val instanceof Array || val instanceof Object ? true : false;
+}
+
+function isJsonString(str: string) {
+  try {
+    return JSON.parse(str) && !!str;
+  } catch (e) {
+    return false;
+  }
+}
+
 function parseJSON<T>(value: string | null): T | undefined {
   try {
     return value === "undefined" ? undefined : JSON.parse(value ?? "");
   } catch {
-    console.log("parsing error on", { value });
+    console.error("parsing error on", { value });
     return undefined;
   }
 }

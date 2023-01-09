@@ -1,19 +1,11 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { Url } from "url";
-import { BaseRepository } from "../../shared/base-repository";
-import { useShouldSetSession } from "../hook/auth";
+import { BaseRepository } from "../../../shared/base-repository";
+import { useShouldSetSession } from "../../../shared/hook/auth";
 import moment from "moment";
+import { AuthProviderProps } from "./props";
 
-interface props {
-  protectedRoute: string;
-  fallback: Url | string;
-  redirectSuccess: Url | string;
-  blockPageAfterAuthorize?: Array<Url | string> | undefined;
-  children?: JSX.Element;
-}
-
-export const AuthProvider = (props: props) => {
+export const AuthProvider = (props: AuthProviderProps) => {
   const [sessionToken, SetSessionToken] = useShouldSetSession();
   const router = useRouter();
   const repository = new BaseRepository();

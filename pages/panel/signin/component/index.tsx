@@ -1,33 +1,23 @@
 import { AtSymbolIcon, LockClosedIcon } from "@heroicons/react/20/solid";
-import { Input } from "../../../components/input";
-import { Button } from "../../../components/button";
-import { LayoutAuth } from "../../../components/layout/auth";
+import { Input } from "../../../../components/input";
+import { Button } from "../../../../components/button";
+import { LayoutAuth } from "../../../../components/layout/auth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
-import { ValidationSchema } from "./validation";
-import { Alert } from "../../../components/alert";
+import { SignInSchema } from "../schema";
+import { Alert } from "../../../../components/alert";
+import { withLang } from "../../../../shared/hoc/lang";
+import { En, Id } from "../lang";
+import { SignInComponentProps } from "./props";
 
-interface props {
-  formSubmit: (data: any) => Promise<boolean>;
-  showAlert: boolean;
-  handleAlertClose?: () => void;
-  submitErrorMessage: string;
-  setAlertType?: string | undefined;
-  setValue: {
-    email: string;
-    password: string;
-    rememberme?: boolean;
-  };
-}
-
-export function SignIn(props: props) {
-  const formOptions = { resolver: yupResolver(ValidationSchema) };
+function SignInComponent(props: SignInComponentProps) {
+  const formOptions = { resolver: yupResolver(SignInSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors }: any = formState;
 
   return (
-    <LayoutAuth>
+    <LayoutAuth title={props?.lang?.titlePage}>
       <>
         <Alert
           type={props.setAlertType}
@@ -43,7 +33,7 @@ export function SignIn(props: props) {
 
           <div>
             <label htmlFor="email-address" className="mb-2">
-              Email Address
+              {props?.lang?.emailLabel}
             </label>
             <Input
               id="email"
@@ -51,9 +41,15 @@ export function SignIn(props: props) {
               type="text"
               autoComplete="email"
               placeholder="john.doe@example.com"
-              icon={
-                <AtSymbolIcon className="h-5 w-5 text-blue-500 group-hover:text-blue-400" />
-              }
+              icon={(isError) => (
+                <AtSymbolIcon
+                  className={`h-5 w-5 ${
+                    isError
+                      ? "text-red-500 group-hover:text-red-400"
+                      : "text-blue-500 group-hover:text-blue-400"
+                  }`}
+                />
+              )}
               className={errors.email ? "is-invalid" : ""}
               inputValidationRule={{ ...register("email") }}
               validationMessages={errors?.email?.message}
@@ -62,16 +58,22 @@ export function SignIn(props: props) {
           </div>
           <div>
             <label htmlFor="password" className="mb-2">
-              Password
+              {props?.lang?.passLabel}
             </label>
             <Input
               id="password"
               name="password"
               type="password"
               autoComplete="current-password"
-              icon={
-                <LockClosedIcon className="h-5 w-5 text-blue-500 group-hover:text-blue-400" />
-              }
+              icon={(isError) => (
+                <LockClosedIcon
+                  className={`h-5 w-5 ${
+                    isError
+                      ? "text-red-500 group-hover:text-red-400"
+                      : "text-blue-500 group-hover:text-blue-400"
+                  }`}
+                />
+              )}
               eyePassword
               inputValidationRule={{ ...register("password") }}
               validationMessages={errors?.password?.message}
@@ -93,7 +95,7 @@ export function SignIn(props: props) {
                 htmlFor="rememberme"
                 className="ml-2 block text-sm text-gray-900"
               >
-                Remember me
+                {props?.lang?.remember}
               </label>
             </div>
 
@@ -102,7 +104,7 @@ export function SignIn(props: props) {
                 href="/forgot-password"
                 className="text-blue-600 hover:text-blue-500"
               >
-                Forgot your password?
+                {props?.lang?.forgotPass}
               </Link>
             </div>
           </div>
@@ -110,25 +112,26 @@ export function SignIn(props: props) {
           <div>
             <Button
               type="submit"
-              label="Sign In"
+              label={props?.lang?.signInButton}
               width="w-full"
               borderWidth="transparent"
+              disabled={props.disabledWhileProccessButton}
             />
           </div>
 
           <div className="relative flex items-center justify-center w-full mt-6 border border-t">
-            <div className="absolute px-5 bg-white">or</div>
+            <div className="absolute px-5 bg-white">{props?.lang?.orLine}</div>
           </div>
 
           <div>
             <div>
               <p className="text-center font-medium">
-                Don&apos;t have an account?{" "}
+                {props?.lang?.registerDesc}{" "}
                 <Link
-                  href="/register"
+                  href="/panel/register"
                   className="text-blue-600 hover:text-blue-500"
                 >
-                  Sign Up
+                  {props?.lang?.signupLink}
                 </Link>
               </p>
             </div>
@@ -138,3 +141,4 @@ export function SignIn(props: props) {
     </LayoutAuth>
   );
 }
+export const SignIn = withLang(SignInComponent, { en: En, id: Id });

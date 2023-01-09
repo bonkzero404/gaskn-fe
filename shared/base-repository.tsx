@@ -1,7 +1,7 @@
 type ObjectOrArray = { [key: string]: any } | Array<{ [key: string]: any }>;
 
 export class BaseRepository {
-  private baseUrl = "http://localhost:4000";
+  private baseUrl = process.env.ENDPOINT_URI;
 
   public defaultOptions(
     options: RequestInit | undefined,
@@ -21,6 +21,17 @@ export class BaseRepository {
     }
 
     return options;
+  }
+
+  private getLangUsage(): string | null {
+    const isBrowser = typeof window === "undefined" ? false : true;
+
+    if (isBrowser) {
+      const getLang = localStorage.getItem("lang");
+      return (getLang as string)?.replace(/"/g, "");
+    }
+
+    return null;
   }
 
   public async SetDataSend(
@@ -43,7 +54,10 @@ export class BaseRepository {
       opts.method = method;
     }
 
-    const res = await fetch(`${this.baseUrl}${path}`, opts);
+    const res = await fetch(
+      `${this.baseUrl}${path}?lang=${this.getLangUsage()}`,
+      opts,
+    );
     return res;
   }
 

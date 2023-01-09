@@ -1,4 +1,4 @@
-import { SolidColor } from "../color";
+import { SolidColor } from "../../shared/color";
 
 export interface ButtonProperties {
   type: "button" | "reset" | "submit" | undefined;
@@ -8,4 +8,5 @@ export interface ButtonProperties {
   fontColor?: string | undefined;
   backgroundColor?: SolidColor | undefined;
   icon?: JSX.Element | undefined;
+  disabled?: boolean;
 }
