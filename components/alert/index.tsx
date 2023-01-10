@@ -23,12 +23,12 @@ export const Alert = (props: AlertProperty) => {
     }
   }, [props.type]);
 
-  return props.show ? (
+  return props?.action?.show ? (
     <div
       className={`bg-${alertColor}-100 border border-${alertColor}-400 text-${alertColor}-700 px-4 py-2 rounded relative`}
       role="alert"
     >
-      <span className="block sm:inline">{props.message}</span>
+      <span className="block sm:inline">{props?.action?.message}</span>
       <span
         className="absolute top-0 bottom-0 right-0 px-4 py-3 cursor-pointer"
         onClick={props.handleClose}

@@ -8,13 +8,15 @@ import { AuthProviderProps } from "./props";
 export const AuthProvider = (props: AuthProviderProps) => {
   const [sessionToken, SetSessionToken] = useShouldSetSession();
   const router = useRouter();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const repository = new BaseRepository();
 
   useEffect(() => {
-    if (sessionToken && sessionToken.token === "") {
+    if (sessionToken && sessionToken?.token === "") {
       const match = router.pathname.match(props.protectedRoute);
 
-      if (match !== null) {
+      if (match && match.length === 0) {
+        // console.log("GGGGG", match);
         router.replace(props.fallback);
       }
     }
@@ -61,8 +63,14 @@ export const AuthProvider = (props: AuthProviderProps) => {
         router.replace(props.fallback);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionToken.token]);
+  }, [
+    sessionToken,
+    props,
+    router.pathname,
+    router,
+    repository,
+    SetSessionToken,
+  ]);
 
   return <>{props.children}</>;
 };

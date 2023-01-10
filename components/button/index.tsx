@@ -1,6 +1,9 @@
+import { useRouter } from "next/router";
 import { ButtonProperties } from "./props";
 
 export const Button = (props: ButtonProperties) => {
+  const router = useRouter();
+
   const fontColor = () => {
     if (props.fontColor) {
       return `text-${props.fontColor}-900`;
@@ -19,23 +22,45 @@ export const Button = (props: ButtonProperties) => {
     }
 
     if (props.disabled) {
-      return "cursor-not-allowed bg-indigo-300 focus:ring-indigo-200";
+      return "cursor-not-allowed bg-blue-300 focus:ring-blue-200";
     }
-    return "bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500";
+    return "bg-blue-600 hover:bg-blue-700 focus:ring-blue-500";
   };
 
-  return (
-    <button
-      type={props.type}
-      className={`p-4 group relative flex ${
-        props.width ? props.width : "w-auto"
-      } justify-center rounded-md border border${
-        props.borderWidth ? `-${props.borderWidth}` : ""
-      } cursor-pointer py-3 px-4 text-sm font-medium ${fontColor()} ${backgroundColor()} focus:outline-none focus:ring-2 focus:ring-offset-2`}
-      disabled={props.disabled}
-    >
-      {props.icon}
-      {props.label}
-    </button>
-  );
+  const className = (): string => {
+    return `p-4 group relative flex ${
+      props.width ? props.width : "w-auto"
+    } justify-center rounded-md border border${
+      props.borderWidth ? `-${props.borderWidth}` : ""
+    } cursor-pointer py-3 px-4 text-sm font-medium ${fontColor()} ${backgroundColor()} focus:outline-none focus:ring-2 focus:ring-offset-2`;
+  };
+
+  const renderButton = () => {
+    if (props.link) {
+      return (
+        <button
+          onClick={() => router.push(props.link as string)}
+          type="button"
+          className={className()}
+          disabled={props.disabled}
+        >
+          {props.icon}
+          {props.label}
+        </button>
+      );
+    }
+
+    return (
+      <button
+        type={props.type}
+        className={className()}
+        disabled={props.disabled}
+      >
+        {props.icon}
+        {props.label}
+      </button>
+    );
+  };
+
+  return renderButton();
 };

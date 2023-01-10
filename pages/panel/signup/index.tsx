@@ -1,14 +1,11 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import useLocalStorage from "../../../shared/hook/localstorage";
-import { useShouldSetSession } from "../../../shared/hook/auth";
 import { Repository } from "./repository";
-import { SignIn } from "./component";
+import { SignUp } from "./component";
 
-const SignInPage = (): JSX.Element => {
+const SignUpPage = (): JSX.Element => {
   const repository = new Repository();
   const router = useRouter();
-  const [_sessionToken, SetSession] = useShouldSetSession();
   const [disabledWhileProccessButton, setDisabledWhileProccessButton] =
     useState(false);
   const [alertAction, setAlertAction] = useState<{
@@ -16,15 +13,6 @@ const SignInPage = (): JSX.Element => {
     show: boolean;
     message: string;
   }>({ type: "info", show: false, message: "" });
-  const [rememberForm, setRememberForm] = useLocalStorage<{
-    email: string;
-    password: string;
-    rememberme?: boolean;
-  }>("remember-form-login", {
-    email: "",
-    password: "",
-    rememberme: false,
-  });
 
   const clearAlert = () => {
     setAlertAction({
@@ -35,30 +23,14 @@ const SignInPage = (): JSX.Element => {
   };
 
   const formSubmit = async (data: {
+    full_name: string;
+    phone: string;
     email: string;
     password: string;
-    rememberme?: boolean;
   }): Promise<boolean> => {
     setDisabledWhileProccessButton(true);
 
-    const reqData = await repository.authenticate({
-      email: data.email,
-      password: data.password,
-    });
-
-    if (data.rememberme) {
-      setRememberForm({
-        email: data.email,
-        password: data.password,
-        rememberme: data.rememberme,
-      });
-    } else {
-      setRememberForm({
-        email: "",
-        password: "",
-        rememberme: data.rememberme,
-      });
-    }
+    const reqData = await repository.register(data);
 
     if (reqData.errors) {
       setAlertAction({
@@ -76,27 +48,19 @@ const SignInPage = (): JSX.Element => {
       message: "Authentication successful",
     });
 
-    SetSession({
-      token: reqData?.data?.token,
-      expires: reqData?.data?.expires,
-    });
-
     setDisabledWhileProccessButton(false);
-
-    setTimeout(() => router.replace("/panel/dashboard"), 500);
 
     return false;
   };
 
   return (
-    <SignIn
+    <SignUp
       formSubmit={formSubmit}
       alertAction={alertAction}
-      setValue={rememberForm}
       disabledWhileProccessButton={disabledWhileProccessButton}
       handleAlertClose={clearAlert}
     />
   );
 };
 
-export default SignInPage;
+export default SignUpPage;
