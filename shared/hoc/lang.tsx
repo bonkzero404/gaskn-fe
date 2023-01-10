@@ -33,7 +33,7 @@ export function withLang(
   return Lang;
 }
 
-export async function getLangServerSideProps(
+export function getLangServerSideProps(
   context: GetServerSidePropsContext,
   languages?: { en: any; id: any },
 ) {

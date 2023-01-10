@@ -115,6 +115,4 @@ export default withLang(SignInPage, langList);
 
 export const getServerSideProps: GetServerSideProps<{ lang: any }> = async (
   context: GetServerSidePropsContext,
-) => {
-  return await getLangServerSideProps(context, langList);
-};
+) => getLangServerSideProps(context, langList);
