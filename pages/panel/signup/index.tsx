@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Repository } from "./repository";
-import { SignUp } from "./component";
+import { SignUpComponent } from "./component";
 import { getLangServerSideProps, withLang } from "../../../shared/hoc/lang";
 import { En, Id } from "./lang";
 import {
@@ -65,7 +65,7 @@ const SignUpPage = ({
   };
 
   return (
-    <SignUp
+    <SignUpComponent
       lang={lang}
       formSubmit={formSubmit}
       alertAction={alertAction}

@@ -9,7 +9,7 @@ import { SignInSchema } from "../schema";
 import { Alert } from "../../../../components/alert";
 import { SignInComponentProps } from "./props";
 
-export function SignIn(props: SignInComponentProps) {
+export function SignInComponent(props: SignInComponentProps) {
   const formOptions = { resolver: yupResolver(SignInSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors }: any = formState;

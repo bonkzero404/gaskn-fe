@@ -12,12 +12,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { SignUpSchema } from "../schema";
 import { Alert } from "../../../../components/alert";
-import { withLang } from "../../../../shared/hoc/lang";
-import { En, Id } from "../lang";
 import { SignUpComponentProps } from "./props";
 import { SolidColor } from "../../../../shared/color";
 
-export function SignUp(props: SignUpComponentProps) {
+export function SignUpComponent(props: SignUpComponentProps) {
   const formOptions = { resolver: yupResolver(SignUpSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors }: any = formState;

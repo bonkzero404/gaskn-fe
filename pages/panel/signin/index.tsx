@@ -1,10 +1,9 @@
 import { useRouter } from "next/router";
-import { Context, useState } from "react";
+import { useState } from "react";
 import useLocalStorage from "../../../shared/hook/localstorage";
 import { useShouldSetSession } from "../../../shared/hook/auth";
 import { Repository } from "./repository";
-import { SignIn } from "./component";
-import { getCookie } from "cookies-next";
+import { SignInComponent } from "./component";
 import { getLangServerSideProps, withLang } from "../../../shared/hoc/lang";
 import { En, Id } from "./lang";
 import {
@@ -101,7 +100,7 @@ const SignInPage = ({
   };
 
   return (
-    <SignIn
+    <SignInComponent
       lang={lang}
       formSubmit={formSubmit}
       alertAction={alertAction}
