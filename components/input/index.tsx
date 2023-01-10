@@ -97,6 +97,7 @@ export const Input = (props: InputProperties) => {
         {withIcon()}
 
         <input
+          data-lpignore
           id={props.id}
           name={props.name}
           type={props.eyePassword && showPass ? "text" : props.type}

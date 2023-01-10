@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Lang } from "../lang";
 import { AuthLayoutProps } from "./props";
 
 export const LayoutAuth = (props: AuthLayoutProps) => {
@@ -26,6 +27,8 @@ export const LayoutAuth = (props: AuthLayoutProps) => {
         <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
           {props.children}
         </div>
+
+        <Lang />
       </div>
     </div>
   );

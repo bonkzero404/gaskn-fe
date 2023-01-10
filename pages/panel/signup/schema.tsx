@@ -1,13 +1,24 @@
 import * as Yup from "yup";
 import "yup-phone";
+import { withLangSchema } from "../../../shared/hoc/lang";
+import { En, Id } from "./lang";
 
-export const SignUpSchema = Yup.object().shape({
-  full_name: Yup.string().required("Fullname is required"),
-  phone: Yup.string()
-    .phone(undefined, undefined, "phone must be a valid phone number.")
-    .required("Phone is required"),
-  email: Yup.string().required("Email is required").email("Email is invalid"),
-  password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Password is required"),
+const SignUpSchemaPrep = (message?: any) => {
+  return Yup.object().shape({
+    full_name: Yup.string().required(message?.validationFieldFullname),
+    phone: Yup.string()
+      .phone(undefined, undefined, message?.validationFieldPhoneValidate)
+      .required(message?.validationFieldPhone),
+    email: Yup.string()
+      .required(message?.validationFieldEmail)
+      .email(message?.validationFieldEmailValidate),
+    password: Yup.string()
+      .min(8, message?.validationFieldPasswordValidate)
+      .required(message?.validationFieldPassword),
+  });
+};
+
+export const SignUpSchema = withLangSchema(SignUpSchemaPrep, {
+  en: En,
+  id: Id,
 });

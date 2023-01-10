@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import useLocalStorage from "../hook/localstorage";
+import * as Yup from "yup";
+import { TypeOfShape } from "yup/lib/object";
 
 export function withLang(
   Component: any,
@@ -24,4 +26,21 @@ export function withLang(
   };
 
   return Lang;
+}
+
+export function withLangSchema(
+  schema: (msg?: any) => Yup.AnyObjectSchema,
+  lang: { [key: string]: { [key: string]: string } },
+) {
+  if (typeof window !== "undefined") {
+    const getLang = localStorage.getItem("lang");
+
+    if (getLang) {
+      return schema(lang[getLang as string]);
+    }
+
+    return schema(lang[process.env.DEFAULT_LANG as any]);
+  }
+
+  return schema();
 }
