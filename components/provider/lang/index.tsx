@@ -1,14 +1,13 @@
 import { useEffect } from "react";
-import useLocalStorage from "../../../shared/hook/localstorage";
+import { useCookies } from "../../../shared/hook/cookie";
 import { LangProps } from "./props";
 
 export const LangProvider = (props: LangProps) => {
-  const [lang, setLang] = useLocalStorage("lang", "");
+  const [lang, setLang] = useCookies("lang", "");
   useEffect(() => {
     if (lang == "") {
       setLang(process.env.DEFAULT_LANG as string);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lang]);
+  }, [lang, setLang]);
   return <>{props.children}</>;
 };

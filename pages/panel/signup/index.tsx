@@ -2,8 +2,19 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { Repository } from "./repository";
 import { SignUp } from "./component";
+import { getLangServerSideProps, withLang } from "../../../shared/hoc/lang";
+import { En, Id } from "./lang";
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from "next";
 
-const SignUpPage = (): JSX.Element => {
+const langList = { en: En, id: Id };
+
+const SignUpPage = ({
+  lang,
+}: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
   const repository = new Repository();
   const router = useRouter();
   const [disabledWhileProccessButton, setDisabledWhileProccessButton] =
@@ -55,6 +66,7 @@ const SignUpPage = (): JSX.Element => {
 
   return (
     <SignUp
+      lang={lang}
       formSubmit={formSubmit}
       alertAction={alertAction}
       disabledWhileProccessButton={disabledWhileProccessButton}
@@ -63,4 +75,10 @@ const SignUpPage = (): JSX.Element => {
   );
 };
 
-export default SignUpPage;
+export default withLang(SignUpPage, langList);
+
+export const getServerSideProps: GetServerSideProps<{ lang: any }> = async (
+  context: GetServerSidePropsContext,
+) => {
+  return await getLangServerSideProps(context, langList);
+};

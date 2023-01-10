@@ -7,11 +7,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { SignInSchema } from "../schema";
 import { Alert } from "../../../../components/alert";
-import { withLang } from "../../../../shared/hoc/lang";
-import { En, Id } from "../lang";
 import { SignInComponentProps } from "./props";
 
-function SignInComponent(props: SignInComponentProps) {
+export function SignIn(props: SignInComponentProps) {
   const formOptions = { resolver: yupResolver(SignInSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors }: any = formState;
@@ -143,4 +141,3 @@ function SignInComponent(props: SignInComponentProps) {
     </LayoutAuth>
   );
 }
-export const SignIn = withLang(SignInComponent, { en: En, id: Id });

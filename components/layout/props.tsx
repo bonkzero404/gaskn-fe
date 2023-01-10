@@ -1,4 +1,4 @@
 export interface AuthLayoutProps {
-  title: string;
+  title: string | undefined;
   children: JSX.Element;
 }

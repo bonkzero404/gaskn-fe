@@ -1,5 +1,5 @@
 export interface SignInComponentProps {
-  lang?: any;
+  lang?: { [key: string]: string };
   formSubmit: (data: any) => Promise<boolean>;
   handleAlertClose?: () => void;
   alertAction: { type: string; show: boolean; message: string };

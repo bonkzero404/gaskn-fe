@@ -1,11 +1,23 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { Context, useState } from "react";
 import useLocalStorage from "../../../shared/hook/localstorage";
 import { useShouldSetSession } from "../../../shared/hook/auth";
 import { Repository } from "./repository";
 import { SignIn } from "./component";
+import { getCookie } from "cookies-next";
+import { getLangServerSideProps, withLang } from "../../../shared/hoc/lang";
+import { En, Id } from "./lang";
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from "next";
 
-const SignInPage = (): JSX.Element => {
+const langList = { en: En, id: Id };
+
+const SignInPage = ({
+  lang,
+}: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
   const repository = new Repository();
   const router = useRouter();
   const [_sessionToken, SetSession] = useShouldSetSession();
@@ -90,6 +102,7 @@ const SignInPage = (): JSX.Element => {
 
   return (
     <SignIn
+      lang={lang}
       formSubmit={formSubmit}
       alertAction={alertAction}
       setValue={rememberForm}
@@ -99,4 +112,10 @@ const SignInPage = (): JSX.Element => {
   );
 };
 
-export default SignInPage;
+export default withLang(SignInPage, langList);
+
+export const getServerSideProps: GetServerSideProps<{ lang: any }> = async (
+  context: GetServerSidePropsContext,
+) => {
+  return await getLangServerSideProps(context, langList);
+};

@@ -17,7 +17,7 @@ import { En, Id } from "../lang";
 import { SignUpComponentProps } from "./props";
 import { SolidColor } from "../../../../shared/color";
 
-function SignUpComponent(props: SignUpComponentProps) {
+export function SignUp(props: SignUpComponentProps) {
   const formOptions = { resolver: yupResolver(SignUpSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors }: any = formState;
@@ -178,4 +178,3 @@ function SignUpComponent(props: SignUpComponentProps) {
     </LayoutAuth>
   );
 }
-export const SignUp = withLang(SignUpComponent, { en: En, id: Id });

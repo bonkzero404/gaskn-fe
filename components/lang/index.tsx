@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import useLocalStorage from "../../shared/hook/localstorage";
+import { useCookies } from "../../shared/hook/cookie";
 
 const langList = [
   {
@@ -14,7 +14,7 @@ const langList = [
 ];
 
 export const Lang = () => {
-  const [lang, setLang] = useLocalStorage<string>(
+  const [lang, setLang] = useCookies<string>(
     "lang",
     process.env.DEFAULT_LANG as any,
   );
