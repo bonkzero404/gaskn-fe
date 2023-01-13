@@ -61,6 +61,8 @@ const SignUpPage = ({
 
     setDisabledWhileProccessButton(false);
 
+    router.push("/panel/activation");
+
     return false;
   };
 

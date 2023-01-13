@@ -9,4 +9,9 @@ export const en = {
   orLine: "or",
   registerDesc: "Don't have an account?",
   signupLink: "Sign Up",
+
+  validationFieldEmail: "Email is required",
+  validationFieldEmailValidate: "Email is invalid",
+  validationFIeldPassword: "Password is required",
+  validationFIeldPasswordLength: "Password must be at least 8 characters",
 };

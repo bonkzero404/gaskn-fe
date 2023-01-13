@@ -9,4 +9,9 @@ export const id = {
   orLine: "atau",
   registerDesc: "Tidak punya akun?",
   signupLink: "Daftar",
+
+  validationFieldEmail: "Alamat surel harus diisi",
+  validationFieldEmailValidate: "Alamat surel tidak valid",
+  validationFIeldPassword: "Kata sandi harus diisi",
+  validationFIeldPasswordLength: "Kata sandi harus memiliki 8 karakter",
 };

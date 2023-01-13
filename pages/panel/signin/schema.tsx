@@ -1,8 +1,19 @@
 import * as Yup from "yup";
+import { withLangSchema } from "../../../shared/hoc/lang";
+import { En, Id } from "./lang";
 
-export const SignInSchema = Yup.object().shape({
-  email: Yup.string().required("Email is required").email("Email is invalid"),
-  password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Password is required"),
+const SignInSchemaPrep = (message?: any) => {
+  return Yup.object().shape({
+    email: Yup.string()
+      .required(message.validationFieldEmail)
+      .email(message.validationFieldEmailValidate),
+    password: Yup.string()
+      .required(message.validationFIeldPassword)
+      .min(8, message.validationFIeldPasswordLength),
+  });
+};
+
+export const SignInSchema = withLangSchema(SignInSchemaPrep, {
+  en: En,
+  id: Id,
 });
