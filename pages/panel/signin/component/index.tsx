@@ -32,7 +32,7 @@ export function SignInComponent(props: SignInComponentProps) {
           <input type="hidden" name="remember" value="true" />
 
           <div>
-            <label htmlFor="email-address" className="mb-2">
+            <label htmlFor="email" className="mb-2">
               {props?.lang?.emailLabel}
             </label>
             <Input
