@@ -61,7 +61,7 @@ const SignUpPage = ({
 
     setDisabledWhileProccessButton(false);
 
-    router.push("/panel/activation");
+    setTimeout(() => router.push("/panel/activation"), 500);
 
     return false;
   };
