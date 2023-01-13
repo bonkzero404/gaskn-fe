@@ -25,18 +25,20 @@ export const Alert = (props: AlertProperty) => {
 
   return props?.action?.show ? (
     <div
-      className={`bg-${alertColor}-100 border border-${alertColor}-400 text-${alertColor}-700 px-4 py-2 rounded relative`}
+      className={`bg-${alertColor}-100 border border-${alertColor}-400 text-${alertColor}-700 px-4 py-2 rounded relative ${props.className}`}
       role="alert"
     >
       <span className="block sm:inline">{props?.action?.message}</span>
-      <span
-        className="absolute top-0 bottom-0 right-0 px-4 py-3 cursor-pointer"
-        onClick={props.handleClose}
-      >
-        <XMarkIcon
-          className={`fill-current h-4 top-0 text-${alertColor}-500`}
-        />
-      </span>
+      {!props?.disableClose && (
+        <span
+          className="absolute top-0 bottom-0 right-0 px-4 py-3 cursor-pointer"
+          onClick={props.handleClose}
+        >
+          <XMarkIcon
+            className={`fill-current h-4 top-0 text-${alertColor}-500`}
+          />
+        </span>
+      )}
     </div>
   ) : (
     <></>
@@ -45,4 +47,5 @@ export const Alert = (props: AlertProperty) => {
 
 Alert.getInitialProps = (props: AlertProperty) => {
   props.type = "info";
+  props.disableClose = false;
 };
