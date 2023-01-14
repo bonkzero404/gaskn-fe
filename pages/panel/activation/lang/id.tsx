@@ -4,9 +4,12 @@ export const id = {
   emailLabel: "Alamat Surel",
   codeLabel: "Kode",
   activationButton: "Aktivasi",
+  resendActivationButton: "Kirim Ulang Aktivasi",
   orLine: "atau",
-  activationDesc: "Belum aktivasi?",
-  resendActivationLink: "Kirim Ulang Kode Aktivasi",
+  registerDesc: "Tidak punya akun?",
+  signupLink: "Daftar",
+  activationInfo:
+    'Silahkan lihat email anda, jika anda belum menerima email aktivasi, silhkan klik tombol "Kirim Ulang Aktivasi"',
 
   validationFieldEmail: "Alamat surel harus diisi",
   validationFieldEmailValidate: "Alamat surel tidak valid",

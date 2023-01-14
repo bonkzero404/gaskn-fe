@@ -4,9 +4,12 @@ export const en = {
   emailLabel: "Email Address",
   codeLabel: "Code",
   activationButton: "Activate",
+  resendActivationButton: "Resend Activation",
   orLine: "or",
-  activationDesc: "Not activation yet?",
-  resendActivationLink: "Resend Activation Code",
+  registerDesc: "Don't have an account?",
+  signupLink: "Sign Up",
+  activationInfo:
+    'Please see your email, if you have not received the activation email, please click the "Resend Activation" button',
 
   validationFieldEmail: "Email is required",
   validationFieldEmailValidate: "Email is invalid",

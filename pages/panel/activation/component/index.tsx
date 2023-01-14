@@ -8,11 +8,23 @@ import Link from "next/link";
 import { ActivationSchema } from "../schema";
 import { Alert } from "../../../../components/alert";
 import { SignInComponentProps } from "./props";
+import { SolidColor } from "../../../../shared/color";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export function ActivationComponent(props: SignInComponentProps) {
+  const router = useRouter();
+  const { email } = router.query;
   const formOptions = { resolver: yupResolver(ActivationSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors }: any = formState;
+  const [visibleEmail, setVisibleEmail] = useState(true);
+
+  useEffect(() => {
+    if (email) {
+      setVisibleEmail(false);
+    }
+  }, [email]);
 
   return (
     <LayoutAuth title={props?.lang?.titlePage}>
@@ -20,7 +32,7 @@ export function ActivationComponent(props: SignInComponentProps) {
         <Alert
           type="info"
           action={{
-            message: "Activation code has been sent to your email account",
+            message: props?.lang?.activationInfo as string,
             show: true,
           }}
           disableClose
@@ -39,7 +51,7 @@ export function ActivationComponent(props: SignInComponentProps) {
           onSubmit={handleSubmit(props.formSubmit)}
         >
           <input type="hidden" name="remember" value="true" />
-          <div>
+          <div className={visibleEmail ? "visible" : "hidden"}>
             <label htmlFor="email" className="mb-2">
               {props?.lang?.emailLabel}
             </label>
@@ -61,6 +73,7 @@ export function ActivationComponent(props: SignInComponentProps) {
               className={errors.email ? "is-invalid" : ""}
               inputValidationRule={{ ...register("email") }}
               validationMessages={errors?.email?.message}
+              defaultValue={email as string}
             />
           </div>
           <div>
@@ -86,17 +99,27 @@ export function ActivationComponent(props: SignInComponentProps) {
               validationMessages={errors?.code?.message}
             />
           </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <Button
+                type="submit"
+                label={props?.lang?.activationButton}
+                width="w-full"
+                borderWidth="transparent"
+                disabled={props.disabledWhileProccessButton}
+              />
+            </div>
 
-          <div>
-            <Button
-              type="submit"
-              label={props?.lang?.activationButton}
-              width="w-full"
-              borderWidth="transparent"
-              disabled={props.disabledWhileProccessButton}
-            />
+            <div>
+              <Button
+                link="/panel/activation"
+                backgroundColor={SolidColor.Sky}
+                label={props?.lang?.resendActivationButton}
+                width="w-full"
+                borderWidth="transparent"
+              />
+            </div>
           </div>
-
           <div className="relative flex items-center justify-center w-full mt-6 border border-t">
             <div className="absolute px-5 bg-white">{props?.lang?.orLine}</div>
           </div>
@@ -104,12 +127,12 @@ export function ActivationComponent(props: SignInComponentProps) {
           <div>
             <div>
               <p className="text-center font-medium">
-                {props?.lang?.activationDesc}{" "}
+                {props?.lang?.registerDesc}{" "}
                 <Link
-                  href="/panel/resend-activation"
+                  href="/panel/signup"
                   className="text-blue-600 hover:text-blue-500"
                 >
-                  {props?.lang?.resendActivationLink}
+                  {props?.lang?.signupLink}
                 </Link>
               </p>
             </div>

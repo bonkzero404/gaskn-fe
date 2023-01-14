@@ -1,3 +1,5 @@
+import { getCookie } from "cookies-next";
+
 type ObjectOrArray = { [key: string]: any } | Array<{ [key: string]: any }>;
 
 export class BaseRepository {
@@ -24,14 +26,8 @@ export class BaseRepository {
   }
 
   private getLangUsage(): string | null {
-    const isBrowser = typeof window === "undefined" ? false : true;
-
-    if (isBrowser) {
-      const getLang = localStorage.getItem("lang");
-      return (getLang as string)?.replace(/"/g, "");
-    }
-
-    return null;
+    const getLang = getCookie("lang");
+    return getLang as string;
   }
 
   public async SetDataSend(
