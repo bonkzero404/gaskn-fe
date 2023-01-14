@@ -5,26 +5,17 @@ import { LayoutAuth } from "../../../../components/layout/auth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
-import { ActivationSchema } from "../schema";
+import { ReActivationSchema } from "../schema";
 import { Alert } from "../../../../components/alert";
 import { SignInComponentProps } from "./props";
-import { SolidColor } from "../../../../shared/color";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
-export function ActivationComponent(props: SignInComponentProps) {
+export function ReActivationComponent(props: SignInComponentProps) {
   const router = useRouter();
   const { email } = router.query;
-  const formOptions = { resolver: yupResolver(ActivationSchema) };
+  const formOptions = { resolver: yupResolver(ReActivationSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
   const { errors }: any = formState;
-  const [visibleEmail, setVisibleEmail] = useState(true);
-
-  useEffect(() => {
-    if (email) {
-      setVisibleEmail(false);
-    }
-  }, [email]);
 
   return (
     <LayoutAuth title={props?.lang?.titlePage}>
@@ -51,7 +42,7 @@ export function ActivationComponent(props: SignInComponentProps) {
           onSubmit={handleSubmit(props.formSubmit)}
         >
           <input type="hidden" name="remember" value="true" />
-          <div className={visibleEmail ? "visible" : "hidden"}>
+          <div>
             <label htmlFor="email" className="mb-2">
               {props?.lang?.emailLabel}
             </label>
@@ -76,49 +67,15 @@ export function ActivationComponent(props: SignInComponentProps) {
               defaultValue={email as string}
             />
           </div>
-          <div>
-            <label htmlFor="code" className="mb-2">
-              {props?.lang?.codeLabel}
-            </label>
-            <Input
-              id="code"
-              name="code"
-              type="text"
-              autoComplete="code"
-              icon={(isError) => (
-                <CodeBracketSquareIcon
-                  className={`h-5 w-5 ${
-                    isError
-                      ? "text-red-500 group-hover:text-red-400"
-                      : "text-blue-500 group-hover:text-blue-400"
-                  }`}
-                />
-              )}
-              className={errors.code ? "is-invalid" : ""}
-              inputValidationRule={{ ...register("code") }}
-              validationMessages={errors?.code?.message}
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            <div>
-              <Button
-                type="submit"
-                label={props?.lang?.activationButton}
-                width="w-full"
-                borderWidth="transparent"
-                disabled={props.disabledWhileProccessButton}
-              />
-            </div>
 
-            <div>
-              <Button
-                link="/panel/re-activation"
-                backgroundColor={SolidColor.Sky}
-                label={props?.lang?.resendActivationButton}
-                width="w-full"
-                borderWidth="transparent"
-              />
-            </div>
+          <div>
+            <Button
+              type="submit"
+              label={props?.lang?.activationButton}
+              width="w-full"
+              borderWidth="transparent"
+              disabled={props.disabledWhileProccessButton}
+            />
           </div>
           <div className="relative flex items-center justify-center w-full mt-6 border border-t">
             <div className="absolute px-5 bg-white">{props?.lang?.orLine}</div>
