@@ -101,7 +101,7 @@ export function SignInComponent(props: SignInComponentProps) {
 
             <div className="text-sm">
               <Link
-                href="/forgot-password"
+                href="/panel/forgot-password"
                 className="text-blue-600 hover:text-blue-500"
               >
                 {props?.lang?.forgotPass}
