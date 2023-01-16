@@ -1,7 +1,7 @@
 import { getCookie, setCookie } from "cookies-next";
 import { Dispatch, SetStateAction, useCallback } from "react";
 
-import { useEventCallback, useEventListener } from "usehooks-ts";
+import { useEventCallback } from "usehooks-ts";
 
 type SetCookie<T> = Dispatch<SetStateAction<T>>;
 
@@ -15,7 +15,7 @@ export function useCookies<T>(key: string, initialValue: T): [T, SetCookie<T>] {
             : item) as T)
         : initialValue;
     } catch (error) {
-      console.warn(`Error reading localStorage key “${key}”:`, error);
+      console.warn(`Error reading cookie key “${key}”:`, error);
       return initialValue;
     }
   }, [initialValue, key]);
