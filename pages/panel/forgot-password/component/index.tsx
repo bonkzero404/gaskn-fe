@@ -1,4 +1,4 @@
-import { AtSymbolIcon, CodeBracketSquareIcon } from "@heroicons/react/20/solid";
+import { AtSymbolIcon } from "@heroicons/react/20/solid";
 import { Input } from "../../../../components/input";
 import { Button } from "../../../../components/button";
 import { LayoutAuth } from "../../../../components/layout/auth";

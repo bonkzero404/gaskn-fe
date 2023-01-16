@@ -4,7 +4,6 @@ import { useCookies } from "../hook/cookie";
 import { getCookie } from "cookies-next";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
-import { CLIENT_STATIC_FILES_RUNTIME_REACT_REFRESH } from "next/dist/shared/lib/constants";
 
 export function withLang(
   Component: any,
