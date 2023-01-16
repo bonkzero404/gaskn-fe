@@ -1,6 +1,5 @@
-// @refresh reset
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Repository } from "./repository";
 import { ForgotPasswordComponent } from "./component";
 import { getLangServerSideProps, withLang } from "../../../shared/hoc/lang";

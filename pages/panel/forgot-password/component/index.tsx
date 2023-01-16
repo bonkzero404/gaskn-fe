@@ -10,6 +10,7 @@ import { Alert } from "../../../../components/alert";
 import { SignInComponentProps } from "./props";
 import { useRouter } from "next/router";
 
+// @refresh reset
 export function ForgotPasswordComponent(props: SignInComponentProps) {
   const router = useRouter();
   const { email } = router.query;

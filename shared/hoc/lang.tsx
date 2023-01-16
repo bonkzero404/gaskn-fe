@@ -3,6 +3,8 @@ import * as Yup from "yup";
 import { useCookies } from "../hook/cookie";
 import { getCookie } from "cookies-next";
 import { GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
+import { CLIENT_STATIC_FILES_RUNTIME_REACT_REFRESH } from "next/dist/shared/lib/constants";
 
 export function withLang(
   Component: any,
@@ -11,6 +13,14 @@ export function withLang(
   const Lang = (props: any) => {
     const [langProp, setLangProp] = useState();
     const [language, _setLanguage] = useCookies("lang", "");
+    const router = useRouter();
+
+    // Refresh for SSR mode
+    useEffect(() => {
+      if (JSON.stringify(props.lang) != JSON.stringify(lang[language as any])) {
+        router.replace(router.asPath);
+      }
+    }, [language, props.lang, router]);
 
     useEffect(() => {
       if (language !== "") {
@@ -38,6 +48,7 @@ export function getLangServerSideProps(
   languages?: { en: any; id: any },
 ) {
   const lang = getCookie("lang", { req: context.req, res: context.res });
+
   let langData: Object | undefined;
 
   if (lang) {
