@@ -29,6 +29,10 @@ export const Alert = (props: AlertProperty) => {
       role="alert"
     >
       <span className="block sm:inline">{props?.action?.message}</span>
+      {(props?.action?.cause || props?.action?.cause == "") && (
+        <span className="block text-sm">{props?.action?.cause}</span>
+      )}
+
       {!props?.disableClose && (
         <span
           className="absolute top-0 bottom-0 right-0 px-4 py-3 cursor-pointer"

@@ -16,6 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
           blockPageAfterAuthorize={[
             "/panel/signin",
             "/panel/forgot-password",
+            "/panel/create-new-password",
             "/panel/signup",
             "/panel/activation",
             "/panel/re-activation",
