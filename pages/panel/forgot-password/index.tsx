@@ -37,7 +37,7 @@ const ForgotPasswordPage = ({
   const formSubmit = async (data: { email: string }): Promise<boolean> => {
     setDisabledWhileProccessButton(true);
 
-    const reqData = await repository.reSendActivation({
+    const reqData = await repository.requestForgotPassword({
       email: data.email,
     });
 
@@ -54,13 +54,13 @@ const ForgotPasswordPage = ({
     setAlertAction({
       type: "success",
       show: true,
-      message: "Authentication successful",
+      message: lang?.successSubmit,
     });
 
     setDisabledWhileProccessButton(false);
 
     setTimeout(
-      () => router.replace(`/panel/forgot-password?email=${data.email}`),
+      () => router.replace(`/panel/create-new-password?email=${data.email}`),
       500,
     );
 

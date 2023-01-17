@@ -11,4 +11,6 @@ export const id = {
 
   validationFieldEmail: "Alamat surel harus diisi",
   validationFieldEmailValidate: "Alamat surel tidak valid",
+  successSubmit:
+    "Berhasil mengirim kode lupa kata sandi, silahkan cek email anda",
 };
