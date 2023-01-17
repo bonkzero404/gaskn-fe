@@ -33,7 +33,7 @@ export const Lang = () => {
     setLangState(lang);
     setLang(lang);
     setTimeout(() => {
-      router.push(router.asPath);
+      router.replace(router.asPath);
     });
   };
 
