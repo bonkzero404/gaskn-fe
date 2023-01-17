@@ -11,4 +11,6 @@ export const id = {
 
   validationFieldEmail: "Alamat surel harus diisi",
   validationFieldEmailValidate: "Alamat surel tidak valid",
+
+  successSubmit: "Berhasil Membuat Ulang Kode Aktivasi",
 };

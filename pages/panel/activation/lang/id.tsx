@@ -14,4 +14,6 @@ export const id = {
   validationFieldEmail: "Alamat surel harus diisi",
   validationFieldEmailValidate: "Alamat surel tidak valid",
   validationFIeldCode: "Kode harus diisi",
+
+  successSubmit: "Berhasil Mengaktivasi Akun",
 };

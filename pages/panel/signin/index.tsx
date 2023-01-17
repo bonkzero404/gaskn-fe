@@ -26,6 +26,7 @@ const SignInPage = ({
     type: string;
     show: boolean;
     message: string;
+    cause?: string;
   }>({ type: "info", show: false, message: "" });
   const [rememberForm, setRememberForm] = useLocalStorage<{
     email: string;
@@ -76,6 +77,7 @@ const SignInPage = ({
         type: "danger",
         show: true,
         message: reqData?.errors?.message,
+        cause: reqData?.errors?.cause,
       });
       setDisabledWhileProccessButton(false);
       return false;
@@ -84,7 +86,7 @@ const SignInPage = ({
     setAlertAction({
       type: "success",
       show: true,
-      message: "Authentication successful",
+      message: lang.successSubmit,
     });
 
     SetSession({

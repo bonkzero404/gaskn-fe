@@ -14,4 +14,6 @@ export const en = {
   validationFieldEmail: "Email is required",
   validationFieldEmailValidate: "Email is invalid",
   validationFIeldCode: "Code is required",
+
+  successSubmit: "Successfully Activated Account",
 };

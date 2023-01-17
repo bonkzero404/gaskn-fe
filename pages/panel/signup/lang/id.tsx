@@ -18,4 +18,6 @@ export const id = {
   validationFieldEmailValidate: "Alamat surel harus valid",
   validationFieldPassword: "Kata sandi harus diisi",
   validationFieldPasswordValidate: "Kata sandi harus minimal 8 karakter",
+
+  successSubmit: "Berhasil Melakukan Pendaftaran",
 };

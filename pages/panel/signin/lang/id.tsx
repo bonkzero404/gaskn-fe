@@ -14,4 +14,6 @@ export const id = {
   validationFieldEmailValidate: "Alamat surel tidak valid",
   validationFIeldPassword: "Kata sandi harus diisi",
   validationFIeldPasswordLength: "Kata sandi harus memiliki 8 karakter",
+
+  successSubmit: "Berhasil Melakukan Otentikasi",
 };

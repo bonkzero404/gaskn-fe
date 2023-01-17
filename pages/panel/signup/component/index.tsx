@@ -28,6 +28,7 @@ export function SignUpComponent(props: SignUpComponentProps) {
           action={{
             message: props.alertAction.message,
             show: props.alertAction.show,
+            cause: props.alertAction.cause,
           }}
           handleClose={props.handleAlertClose}
         />

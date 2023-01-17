@@ -23,6 +23,7 @@ const SignUpPage = ({
     type: string;
     show: boolean;
     message: string;
+    cause?: string;
   }>({ type: "info", show: false, message: "" });
 
   const clearAlert = () => {
@@ -48,6 +49,7 @@ const SignUpPage = ({
         type: "danger",
         show: true,
         message: reqData?.errors?.message,
+        cause: reqData?.errors?.cause,
       });
       setDisabledWhileProccessButton(false);
       return false;
@@ -56,7 +58,7 @@ const SignUpPage = ({
     setAlertAction({
       type: "success",
       show: true,
-      message: "Authentication successful",
+      message: lang?.successSubmit,
     });
 
     setDisabledWhileProccessButton(false);

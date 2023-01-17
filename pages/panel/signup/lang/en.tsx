@@ -18,4 +18,6 @@ export const en = {
   validationFieldEmailValidate: "Email must be a valid email address.",
   validationFieldPassword: "Password is required",
   validationFieldPasswordValidate: "Password must be at least 8 characters",
+
+  successSubmit: "Successful Registration",
 };

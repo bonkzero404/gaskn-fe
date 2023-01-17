@@ -33,6 +33,7 @@ export function ReActivationComponent(props: SignInComponentProps) {
           action={{
             message: props.alertAction.message,
             show: props.alertAction.show,
+            cause: props.alertAction.cause,
           }}
           handleClose={props.handleAlertClose}
           className="mt-4"

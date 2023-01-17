@@ -24,6 +24,7 @@ const ForgotPasswordPage = ({
     type: string;
     show: boolean;
     message: string;
+    cause?: string;
   }>({ type: "info", show: false, message: "" });
 
   const clearAlert = () => {
@@ -46,6 +47,7 @@ const ForgotPasswordPage = ({
         type: "danger",
         show: true,
         message: reqData?.errors?.message,
+        cause: reqData?.errors?.cause,
       });
       setDisabledWhileProccessButton(false);
       return false;
