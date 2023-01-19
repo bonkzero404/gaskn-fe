@@ -17,7 +17,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
   useEffect(() => {
     if (sessionCookie && sessionCookie?.token === "") {
       const match = router.pathname.match(props.protectedRoute);
-      console.log("MATCH", match);
+
       if (props.blockPageAfterAuthorize && match && match.length > 0) {
         const finder = props.blockPageAfterAuthorize.filter(
           (val) => val === match[0],
