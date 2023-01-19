@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import useLocalStorage from "../../../shared/hook/localstorage";
-import { useShouldSetSession } from "../../../shared/hook/auth";
 import { Repository } from "./repository";
 import { SignInComponent } from "./component";
 import { getLangServerSideProps, withLang } from "../../../shared/hoc/lang";
@@ -11,6 +10,7 @@ import {
   GetServerSidePropsContext,
   InferGetServerSidePropsType,
 } from "next";
+import { useCookies } from "../../../shared/hook/cookie";
 
 const langList = { en: En, id: Id };
 
@@ -19,7 +19,10 @@ const SignInPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element => {
   const repository = new Repository();
   const router = useRouter();
-  const [_sessionToken, SetSession] = useShouldSetSession();
+  const [_sessionCookie, SetCookie] = useCookies<{
+    expires?: number;
+    token?: string;
+  }>("auth", { expires: 0, token: "" });
   const [disabledWhileProccessButton, setDisabledWhileProccessButton] =
     useState(false);
   const [alertAction, setAlertAction] = useState<{
@@ -89,7 +92,7 @@ const SignInPage = ({
       message: lang.successSubmit,
     });
 
-    SetSession({
+    SetCookie({
       token: reqData?.data?.token,
       expires: reqData?.data?.expires,
     });

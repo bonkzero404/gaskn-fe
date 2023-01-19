@@ -1,31 +1,39 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { BaseRepository } from "../../../shared/base-repository";
-import { useShouldSetSession } from "../../../shared/hook/auth";
 import moment from "moment";
 import { AuthProviderProps } from "./props";
+import { useCookies } from "../../../shared/hook/cookie";
 
 export const AuthProvider = (props: AuthProviderProps) => {
-  const [sessionToken, SetSessionToken] = useShouldSetSession();
+  const [sessionCookie, SetCookie] = useCookies<{
+    expires?: number;
+    token?: string;
+  }>("auth", { expires: 0, token: "" });
   const router = useRouter();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const repository = new BaseRepository();
 
   useEffect(() => {
-    if (sessionToken && sessionToken?.token === "") {
+    if (sessionCookie && sessionCookie?.token === "") {
       const match = router.pathname.match(props.protectedRoute);
+      console.log("MATCH", match);
+      if (props.blockPageAfterAuthorize && match && match.length > 0) {
+        const finder = props.blockPageAfterAuthorize.filter(
+          (val) => val === match[0],
+        );
 
-      if (match && match.length === 0) {
-        // console.log("GGGGG", match);
-        router.replace(props.fallback);
+        if (finder.length === 0) {
+          router.replace(props.fallback);
+        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionToken]);
+  }, [sessionCookie]);
 
   useEffect(() => {
-    if (sessionToken && sessionToken.token !== "") {
-      const tokenExpires = moment.unix(sessionToken.expires);
+    if (sessionCookie && sessionCookie.token !== "") {
+      const tokenExpires = moment.unix(sessionCookie.expires as number);
       const dateNow = moment().valueOf();
       const subtractExpires = tokenExpires.subtract(1, "minutes").valueOf();
 
@@ -44,7 +52,11 @@ export const AuthProvider = (props: AuthProviderProps) => {
 
       if (dateNow > subtractExpires && dateNow < tokenExpires.valueOf()) {
         repository
-          .FetchGet("/api/v1/auth/refresh-token", undefined, sessionToken.token)
+          .FetchGet(
+            "/api/v1/auth/refresh-token",
+            undefined,
+            sessionCookie.token,
+          )
           .then(async (response) => {
             const data = await (response as any).json();
 
@@ -52,7 +64,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
               return router.replace(props.fallback);
             }
 
-            SetSessionToken({
+            SetCookie({
               token: data.token,
               expires: data.expires,
             });
@@ -63,14 +75,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
         router.replace(props.fallback);
       }
     }
-  }, [
-    sessionToken,
-    props,
-    router.pathname,
-    router,
-    repository,
-    SetSessionToken,
-  ]);
+  }, [props, router.pathname, router, repository, sessionCookie, SetCookie]);
 
   return <>{props.children}</>;
 };
