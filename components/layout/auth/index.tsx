@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Lang } from "../lang";
+import { Lang } from "../../lang";
 import { AuthLayoutProps } from "./props";
 
 export const LayoutAuth = (props: AuthLayoutProps) => {

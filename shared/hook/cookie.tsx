@@ -1,4 +1,5 @@
-import { getCookie, setCookie } from "cookies-next";
+import { getCookie, setCookie, deleteCookie } from "cookies-next";
+import { OptionsType } from "cookies-next/lib/types";
 import { Dispatch, SetStateAction, useCallback } from "react";
 
 import { useEventCallback } from "usehooks-ts";
@@ -26,6 +27,9 @@ export function useCookies<T>(key: string, initialValue: T): [T, SetCookie<T>] {
 
   return [readValue(), setValue];
 }
+
+export const removeCookie = (key: string, options?: OptionsType) =>
+  deleteCookie(key, options);
 
 function isJsonString(str: string) {
   try {

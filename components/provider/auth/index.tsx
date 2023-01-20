@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BaseRepository } from "../../../shared/base-repository";
 import moment from "moment";
 import { AuthProviderProps } from "./props";
-import { useCookies } from "../../../shared/hook/cookie";
+import { removeCookie, useCookies } from "../../../shared/hook/cookie";
+import { useLocalStorage } from "usehooks-ts";
+import useDidMountEffect from "../../../shared/hook/mount";
 
 export const AuthProvider = (props: AuthProviderProps) => {
   const [sessionCookie, SetCookie] = useCookies<{
@@ -13,8 +15,13 @@ export const AuthProvider = (props: AuthProviderProps) => {
   const router = useRouter();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const repository = new BaseRepository();
+  const [rememberForm, _setRememberForm] = useLocalStorage<{
+    email?: string;
+    password?: string;
+    rememberme?: boolean;
+  }>("remember-form-login", {});
 
-  useEffect(() => {
+  useDidMountEffect(() => {
     if (sessionCookie && sessionCookie?.token === "") {
       const match = router.pathname.match(props.protectedRoute);
 
@@ -25,17 +32,19 @@ export const AuthProvider = (props: AuthProviderProps) => {
 
         if (finder.length === 0) {
           router.replace(props.fallback);
+          return;
         }
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionCookie]);
 
-  useEffect(() => {
-    if (sessionCookie && sessionCookie.token !== "") {
+    if (router.pathname && sessionCookie && sessionCookie.token !== "") {
+      console.log("TAEEEE");
       const tokenExpires = moment.unix(sessionCookie.expires as number);
       const dateNow = moment().valueOf();
-      const subtractExpires = tokenExpires.subtract(1, "minutes").valueOf();
+      const subtractExpires = moment
+        .unix(sessionCookie.expires as number)
+        .subtract(2, "minutes")
+        .valueOf();
 
       if (dateNow <= subtractExpires) {
         if (
@@ -50,6 +59,39 @@ export const AuthProvider = (props: AuthProviderProps) => {
         }
       }
 
+      if (dateNow >= tokenExpires.valueOf()) {
+        if (rememberForm) {
+          repository
+            .FetchPost("/api/v1/auth", {
+              email: rememberForm.email,
+              password: rememberForm.password,
+            })
+            .then(async (response) => {
+              const data = await (response as any).json();
+
+              if (data?.errors) {
+                removeCookie("auth");
+                router.replace(props.fallback);
+                return;
+              }
+
+              SetCookie({
+                token: data.data.token,
+                expires: data.data.expires,
+              });
+
+              return;
+            })
+            .catch((_err) => {
+              removeCookie("auth");
+              router.replace(props.fallback);
+            });
+        } else {
+          removeCookie("auth");
+          router.replace(props.fallback);
+        }
+      }
+
       if (dateNow > subtractExpires && dateNow < tokenExpires.valueOf()) {
         repository
           .FetchGet(
@@ -61,21 +103,26 @@ export const AuthProvider = (props: AuthProviderProps) => {
             const data = await (response as any).json();
 
             if (data?.errors) {
-              return router.replace(props.fallback);
+              removeCookie("auth");
+              router.replace(props.fallback);
+              return;
             }
 
             SetCookie({
-              token: data.token,
-              expires: data.expires,
+              token: data.data.token,
+              expires: data.data.expires,
             });
+
+            return;
+          })
+          .catch((_err) => {
+            removeCookie("auth");
+            router.replace(props.fallback);
+            return;
           });
       }
-
-      if (dateNow >= tokenExpires.valueOf()) {
-        router.replace(props.fallback);
-      }
     }
-  }, [props, router.pathname, router, repository, sessionCookie, SetCookie]);
+  }, [props]);
 
   return <>{props.children}</>;
 };
