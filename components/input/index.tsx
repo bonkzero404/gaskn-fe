@@ -36,13 +36,13 @@ export const Input = (props: InputProperties) => {
                   ? "red"
                   : props.borderColor
                   ? props.borderColor
-                  : "blue"
+                  : "sky"
               }-500 group-hover:text-${
                 props.validationMessages
                   ? "red"
                   : props.borderColor
                   ? props.borderColor
-                  : "blue"
+                  : "sky"
               }-400`}
             />
           ) : (
@@ -52,13 +52,13 @@ export const Input = (props: InputProperties) => {
                   ? "red"
                   : props.borderColor
                   ? props.borderColor
-                  : "blue"
+                  : "sky"
               }-500 group-hover:text-${
                 props.validationMessages
                   ? "red"
                   : props.borderColor
                   ? props.borderColor
-                  : "blue"
+                  : "sky"
               }-400`}
             />
           )}
@@ -80,7 +80,7 @@ export const Input = (props: InputProperties) => {
       return `dark:focus:ring-${props.focusBorderColor}-500 dark:focus:border-${props.focusBorderColor}-500`;
     }
 
-    return "dark:focus:ring-blue-500 dark:focus:border-blue-500";
+    return "dark:focus:ring-sky-500 dark:focus:border-sky-500";
   };
 
   const fontColor = () => {
@@ -119,6 +119,7 @@ export const Input = (props: InputProperties) => {
           placeholder={props.placeholder}
           required={props.required ? true : false}
           {...props.inputValidationRule}
+          onKeyUp={props.onKeyUp}
         />
 
         {eyePassword()}

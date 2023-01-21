@@ -11,7 +11,7 @@ export const SideBar = (props: SidebarProps) => {
   return (
     <aside
       id="sidebar"
-      className={`w-64 h-screen border-r border-gray-100 max-[640px]:-ml-64 delay-400 duration-500 ease-in-out transition-all transform ${
+      className={`max-[640px]:fixed max-[640px]:z-50 overflow-auto w-64 h-screen border-r border-gray-100 max-[640px]:-ml-64 delay-400 duration-500 ease-in-out transition-all transform ${
         props.isOpenDrawer
           ? "max-[640px]:translate-x-full"
           : "max-[640px]:translate-x-0"
@@ -28,7 +28,7 @@ export const SideBar = (props: SidebarProps) => {
         </button>
         <a
           href="https://flowbite.com/"
-          className="flex items-center pl-2.5 mb-9 p-2"
+          className="flex items-center pl-2.5 mb-9 p-2 pt-0"
         >
           <Image
             loader={logoApp}

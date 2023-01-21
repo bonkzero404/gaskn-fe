@@ -1,4 +1,8 @@
-import { HTMLInputTypeAttribute } from "react";
+import {
+  ChangeEventHandler,
+  HTMLInputTypeAttribute,
+  KeyboardEventHandler,
+} from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { SolidColor } from "../../shared/color";
 
@@ -22,4 +26,5 @@ export interface InputProperties {
   inputValidationRule?: UseFormRegisterReturn;
   validationMessages?: string | undefined;
   defaultValue?: string | undefined;
+  onKeyUp?: KeyboardEventHandler<HTMLInputElement>;
 }

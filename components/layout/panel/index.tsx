@@ -8,15 +8,18 @@ export const LayoutPanel = (props: PanelLayoutProps) => {
 
   return (
     <div className="container m-0 p-0 min-h-full min-w-full">
-      <div className="flex flex-row flex-wrap">
+      <div className="flex flex-row">
         <SideBar
           isOpenDrawer={isOpenDrawer}
           closeDrawer={() => setOpenDrawer(false)}
         />
 
-        <div className="bg-gray-100 flex-1">
-          <Header actionDrawer={() => setOpenDrawer(true)} />
-          <div className="p-6">{props.children}</div>
+        <div className="bg-gray-100 flex-1 w-full max-[640px]:ml-0 overflow-auto h-screen">
+          <Header
+            title={props.titlePage}
+            actionDrawer={() => setOpenDrawer(true)}
+          />
+          <div className="p-6 mt-14">{props.children}</div>
         </div>
       </div>
     </div>
