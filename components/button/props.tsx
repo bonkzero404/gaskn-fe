@@ -1,3 +1,4 @@
+import { MouseEventHandler } from "react";
 import { SolidColor } from "../../shared/color";
 
 export interface ButtonProperties {
@@ -10,4 +11,6 @@ export interface ButtonProperties {
   icon?: JSX.Element | undefined;
   disabled?: boolean;
   link?: string | undefined;
+  onClick?: MouseEventHandler<HTMLButtonElement> | undefined;
+  className?: string | undefined;
 }

@@ -32,7 +32,9 @@ export const Button = (props: ButtonProperties) => {
       props.width ? props.width : "w-auto"
     } justify-center rounded-md border border${
       props.borderWidth ? `-${props.borderWidth}` : ""
-    } cursor-pointer py-3 px-4 text-sm font-medium ${fontColor()} ${backgroundColor()} focus:outline-none focus:ring-2 focus:ring-offset-2`;
+    } cursor-pointer py-3 px-4 text-sm font-medium ${fontColor()} ${backgroundColor()} focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+      props.className
+    }`;
   };
 
   const renderButton = () => {
@@ -55,6 +57,7 @@ export const Button = (props: ButtonProperties) => {
         type={props.type}
         className={className()}
         disabled={props.disabled}
+        onClick={props.onClick}
       >
         {props.icon}
         {props.label}
