@@ -18,13 +18,13 @@ export const Button = (props: ButtonProperties) => {
         return `cursor-not-allowed bg-${props.backgroundColor}-300 focus:ring-${props.backgroundColor}-200`;
       }
 
-      return `bg-${props.backgroundColor}-500 hover:bg-${props.backgroundColor}-700 focus:ring-${props.backgroundColor}-500`;
+      return `bg-${props.backgroundColor}-500 hover:bg-${props.backgroundColor}-600 focus:ring-${props.backgroundColor}-500`;
     }
 
     if (props.disabled) {
       return "cursor-not-allowed bg-sky-300 focus:ring-sky-200";
     }
-    return "bg-sky-500 hover:bg-sky-700 focus:ring-sky-500";
+    return "bg-sky-500 hover:bg-sky-600 focus:ring-sky-500";
   };
 
   const className = (): string => {

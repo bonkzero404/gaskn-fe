@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { AlertProperty } from "./props";
 
 export const Alert = (props: AlertProperty) => {
-  const [alertColor, setAlertColor] = useState("blue");
+  const [alertColor, setAlertColor] = useState("sky");
 
   useEffect(() => {
     if (props.type === "danger") {
@@ -11,7 +11,7 @@ export const Alert = (props: AlertProperty) => {
     }
 
     if (props.type === "info") {
-      setAlertColor("blue");
+      setAlertColor("sky");
     }
 
     if (props.type === "warning") {

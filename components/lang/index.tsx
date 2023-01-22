@@ -45,7 +45,7 @@ export const Lang = () => {
             <a>{item.lang}</a>
           ) : (
             <a
-              className="text-blue-500 hover:text-blue-800 cursor-pointer"
+              className="text-sky-500 hover:text-sky-600 cursor-pointer"
               onClick={() => handleLanguageChange(item.val)}
             >
               {item.lang}
