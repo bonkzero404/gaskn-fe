@@ -1,11 +1,17 @@
 import { ChartPieIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
+import { Avatar } from "../avatar";
 import { SidebarProps } from "./props";
 
 export const SideBar = (props: SidebarProps) => {
   // @ts-ignore
   const logoApp = ({ src }) => {
     return `https://tailwindui.com/img/logos/${src}?color=indigo&shade=600`;
+  };
+
+  // @ts-ignore
+  const img = ({ src }) => {
+    return `https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.jpg`;
   };
 
   return (
@@ -53,7 +59,7 @@ export const SideBar = (props: SidebarProps) => {
               <li>
                 <a
                   href="#"
-                  className="flex items-center p-2 text-base font-normal hover:text-white rounded-lg dark:text-gray hover:bg-gray-100 dark:hover:bg-sky-900"
+                  className="flex items-center p-2 text-base font-normal hover:text-white rounded-lg dark:text-gray hover:bg-gray-100 dark:hover:bg-sky-400"
                 >
                   <ChartPieIcon className="w-7 h-7" />
                   <span className="ml-3">Dashboard</span>

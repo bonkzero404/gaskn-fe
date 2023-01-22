@@ -9,7 +9,7 @@ export const LayoutAuth = (props: AuthLayoutProps) => {
   };
 
   return (
-    <div className="flex min-h-full items-center justify-center">
+    <div className="flex items-center justify-center bg-gray-200">
       <div className="w-full max-w-md space-y-8">
         <div>
           <Image

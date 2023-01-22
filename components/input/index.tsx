@@ -1,4 +1,5 @@
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
+import * as Icon from "@heroicons/react/20/solid";
 import { useState } from "react";
 import { InputProperties } from "./props";
 
@@ -22,6 +23,22 @@ export const Input = (props: InputProperties) => {
     }
   };
 
+  const iconLoadString = () => {
+    if (props.iconString) {
+      padLeft = "pl-10";
+      const Icn = (Icon as any)[props.iconString];
+      return (
+        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <Icn
+            className={`h-5 w-5 ${
+              props.validationMessages ? "text-red-300" : "text-sky-500"
+            }`}
+          />
+        </div>
+      );
+    }
+  };
+
   const eyePassword = () => {
     if (props.eyePassword) {
       return (
@@ -33,33 +50,21 @@ export const Input = (props: InputProperties) => {
             <EyeIcon
               className={`h-6 font-extralight text-${
                 props.validationMessages
-                  ? "red"
+                  ? "red-300"
                   : props.borderColor
                   ? props.borderColor
-                  : "sky"
-              }-500 group-hover:text-${
-                props.validationMessages
-                  ? "red"
-                  : props.borderColor
-                  ? props.borderColor
-                  : "sky"
-              }-400`}
+                  : "sky-500"
+              }`}
             />
           ) : (
             <EyeSlashIcon
               className={`h-6 font-extralight text-${
                 props.validationMessages
-                  ? "red"
+                  ? "red-300"
                   : props.borderColor
                   ? props.borderColor
-                  : "sky"
-              }-500 group-hover:text-${
-                props.validationMessages
-                  ? "red"
-                  : props.borderColor
-                  ? props.borderColor
-                  : "sky"
-              }-400`}
+                  : "sky-500"
+              }`}
             />
           )}
         </div>
@@ -96,6 +101,8 @@ export const Input = (props: InputProperties) => {
       <div className="relative">
         {withIcon()}
 
+        {iconLoadString()}
+
         <input
           data-lpignore
           id={props.id}
@@ -113,7 +120,7 @@ export const Input = (props: InputProperties) => {
             props.rounded ? props.rounded : "rounded-lg"
           } dark:placeholder-gray-300 ${focusBorderColor()} ${
             props.validationMessages
-              ? "border-red-500 dark:focus:ring-red-500 dark:focus:border-red-500"
+              ? "border-red-300 dark:focus:ring-red-300 dark:focus:border-red-300"
               : ""
           } ${props.className ? props.className : ""}`}
           placeholder={props.placeholder}
@@ -125,7 +132,7 @@ export const Input = (props: InputProperties) => {
         {eyePassword()}
       </div>
       {props.validationMessages && (
-        <label className="text-xs text-red-500">
+        <label className="text-xs text-red-400">
           {props.validationMessages}
         </label>
       )}

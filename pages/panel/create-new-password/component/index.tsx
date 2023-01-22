@@ -1,8 +1,3 @@
-import {
-  AtSymbolIcon,
-  CodeBracketSquareIcon,
-  LockClosedIcon,
-} from "@heroicons/react/20/solid";
 import { Input } from "../../../../components/input";
 import { Button } from "../../../../components/button";
 import { LayoutAuth } from "../../../../components/layout/auth";
@@ -65,15 +60,7 @@ export function CreateNewPasswordComponent(props: SignInComponentProps) {
               type="text"
               autoComplete="email"
               placeholder="john.doe@example.com"
-              icon={(isError) => (
-                <AtSymbolIcon
-                  className={`h-5 w-5 ${
-                    isError
-                      ? "text-red-500 group-hover:text-red-400"
-                      : "text-blue-500 group-hover:text-blue-400"
-                  }`}
-                />
-              )}
+              iconString="AtSymbolIcon"
               className={errors.email ? "is-invalid" : ""}
               inputValidationRule={{ ...register("email") }}
               validationMessages={errors?.email?.message}
@@ -90,15 +77,7 @@ export function CreateNewPasswordComponent(props: SignInComponentProps) {
               name="code"
               type="text"
               autoComplete="code"
-              icon={(isError) => (
-                <CodeBracketSquareIcon
-                  className={`h-5 w-5 ${
-                    isError
-                      ? "text-red-500 group-hover:text-red-400"
-                      : "text-blue-500 group-hover:text-blue-400"
-                  }`}
-                />
-              )}
+              iconString="CodeBracketSquareIcon"
               className={errors.code ? "is-invalid" : ""}
               inputValidationRule={{ ...register("code") }}
               validationMessages={errors?.code?.message}
@@ -114,15 +93,7 @@ export function CreateNewPasswordComponent(props: SignInComponentProps) {
               name="password"
               type="password"
               autoComplete="password"
-              icon={(isError) => (
-                <LockClosedIcon
-                  className={`h-5 w-5 ${
-                    isError
-                      ? "text-red-500 group-hover:text-red-400"
-                      : "text-blue-500 group-hover:text-blue-400"
-                  }`}
-                />
-              )}
+              iconString="LockClosedIcon"
               eyePassword
               inputValidationRule={{ ...register("password") }}
               validationMessages={errors?.password?.message}
@@ -138,15 +109,7 @@ export function CreateNewPasswordComponent(props: SignInComponentProps) {
               name="repeat-password"
               type="password"
               autoComplete="repeat-password"
-              icon={(isError) => (
-                <LockClosedIcon
-                  className={`h-5 w-5 ${
-                    isError
-                      ? "text-red-500 group-hover:text-red-400"
-                      : "text-blue-500 group-hover:text-blue-400"
-                  }`}
-                />
-              )}
+              iconString="LockClosedIcon"
               eyePassword
               inputValidationRule={{ ...register("repeatPassword") }}
               validationMessages={errors?.repeatPassword?.message}
@@ -172,7 +135,7 @@ export function CreateNewPasswordComponent(props: SignInComponentProps) {
                 {props?.lang?.registerDesc}{" "}
                 <Link
                   href="/panel/signup"
-                  className="text-blue-600 hover:text-blue-500"
+                  className="text-sky-500 hover:text-sky-600"
                 >
                   {props?.lang?.signupLink}
                 </Link>

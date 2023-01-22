@@ -1,4 +1,3 @@
-import { AtSymbolIcon, CodeBracketSquareIcon } from "@heroicons/react/20/solid";
 import { Input } from "../../../../components/input";
 import { Button } from "../../../../components/button";
 import { LayoutAuth } from "../../../../components/layout/auth";
@@ -62,15 +61,7 @@ export function ActivationComponent(props: SignInComponentProps) {
               type="text"
               autoComplete="email"
               placeholder="john.doe@example.com"
-              icon={(isError) => (
-                <AtSymbolIcon
-                  className={`h-5 w-5 ${
-                    isError
-                      ? "text-red-500 group-hover:text-red-400"
-                      : "text-blue-500 group-hover:text-blue-400"
-                  }`}
-                />
-              )}
+              iconString="AtSymbolIcon"
               className={errors.email ? "is-invalid" : ""}
               inputValidationRule={{ ...register("email") }}
               validationMessages={errors?.email?.message}
@@ -86,15 +77,7 @@ export function ActivationComponent(props: SignInComponentProps) {
               name="code"
               type="text"
               autoComplete="code"
-              icon={(isError) => (
-                <CodeBracketSquareIcon
-                  className={`h-5 w-5 ${
-                    isError
-                      ? "text-red-500 group-hover:text-red-400"
-                      : "text-blue-500 group-hover:text-blue-400"
-                  }`}
-                />
-              )}
+              iconString="CodeBracketSquareIcon"
               className={errors.code ? "is-invalid" : ""}
               inputValidationRule={{ ...register("code") }}
               validationMessages={errors?.code?.message}
@@ -131,7 +114,7 @@ export function ActivationComponent(props: SignInComponentProps) {
                 {props?.lang?.registerDesc}{" "}
                 <Link
                   href="/panel/signup"
-                  className="text-blue-600 hover:text-blue-500"
+                  className="text-sky-500 hover:text-sky-600"
                 >
                   {props?.lang?.signupLink}
                 </Link>

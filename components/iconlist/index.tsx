@@ -1,5 +1,5 @@
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/20/solid";
-import * as Icon from "@heroicons/react/24/solid";
+import * as Icon from "@heroicons/react/20/solid";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "../input";

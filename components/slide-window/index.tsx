@@ -13,8 +13,8 @@ export const SlideWindow = (props: SlideWindowProps) => {
         } border-gray-100 duration-300 ease-in-out transition-all transform `}
         aria-label="SlideWindow"
       >
-        <div className="relative overflow-hidden min-h-full bg-white dark:bg-white-800">
-          <div className="fixed w-full bg-white min-h-[56.6px] shadow-md p-3 z-20">
+        <div className="relative overflow-hidden min-h-full bg-white dark:bg-white-800 ">
+          <div className="fixed w-full bg-white min-h-[56.6px] shadow-md p-3 z-20 border-b border-white">
             <button
               className="absolute left-3 top-3.5"
               type="button"
@@ -23,7 +23,7 @@ export const SlideWindow = (props: SlideWindowProps) => {
               <XMarkIcon className="h-7 w-7" />
             </button>
 
-            <p className="ml-10 text-lg">{props.windowTitle}</p>
+            <p className="ml-10 text-lg mt-[2px]">{props.windowTitle}</p>
           </div>
           <div className="absolute overflow-y-auto w-full p-4 bottom-0 top-14">
             {props.children}

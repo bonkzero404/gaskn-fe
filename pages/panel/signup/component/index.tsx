@@ -1,9 +1,3 @@
-import {
-  AtSymbolIcon,
-  IdentificationIcon,
-  LockClosedIcon,
-  PhoneIcon,
-} from "@heroicons/react/20/solid";
 import { Input } from "../../../../components/input";
 import { Button } from "../../../../components/button";
 import { LayoutAuth } from "../../../../components/layout/auth";
@@ -47,15 +41,7 @@ export function SignUpComponent(props: SignUpComponentProps) {
               name="full_name"
               type="text"
               placeholder="John Doe"
-              icon={(isError) => (
-                <IdentificationIcon
-                  className={`h-5 w-5 ${
-                    isError
-                      ? "text-red-500 group-hover:text-red-400"
-                      : "text-blue-500 group-hover:text-blue-400"
-                  }`}
-                />
-              )}
+              iconString="IdentificationIcon"
               className={errors.full_name ? "is-invalid" : ""}
               inputValidationRule={{ ...register("full_name") }}
               validationMessages={errors?.full_name?.message}
@@ -71,15 +57,7 @@ export function SignUpComponent(props: SignUpComponentProps) {
               name="phone"
               type="text"
               placeholder="+62"
-              icon={(isError) => (
-                <PhoneIcon
-                  className={`h-5 w-5 ${
-                    isError
-                      ? "text-red-500 group-hover:text-red-400"
-                      : "text-blue-500 group-hover:text-blue-400"
-                  }`}
-                />
-              )}
+              iconString="PhoneIcon"
               className={errors.phone ? "is-invalid" : ""}
               inputValidationRule={{ ...register("phone") }}
               validationMessages={errors?.phone?.message}
@@ -96,15 +74,7 @@ export function SignUpComponent(props: SignUpComponentProps) {
               type="text"
               autoComplete="email"
               placeholder="john.doe@example.com"
-              icon={(isError) => (
-                <AtSymbolIcon
-                  className={`h-5 w-5 ${
-                    isError
-                      ? "text-red-500 group-hover:text-red-400"
-                      : "text-blue-500 group-hover:text-blue-400"
-                  }`}
-                />
-              )}
+              iconString="AtSymbolIcon"
               className={errors.email ? "is-invalid" : ""}
               inputValidationRule={{ ...register("email") }}
               validationMessages={errors?.email?.message}
@@ -119,15 +89,7 @@ export function SignUpComponent(props: SignUpComponentProps) {
               name="password"
               type="password"
               autoComplete="current-password"
-              icon={(isError) => (
-                <LockClosedIcon
-                  className={`h-5 w-5 ${
-                    isError
-                      ? "text-red-500 group-hover:text-red-400"
-                      : "text-blue-500 group-hover:text-blue-400"
-                  }`}
-                />
-              )}
+              iconString="LockClosedIcon"
               eyePassword
               inputValidationRule={{ ...register("password") }}
               validationMessages={errors?.password?.message}
@@ -165,7 +127,7 @@ export function SignUpComponent(props: SignUpComponentProps) {
                 {props?.lang?.signInDesc}{" "}
                 <Link
                   href="/panel/signin"
-                  className="text-blue-600 hover:text-blue-500"
+                  className="text-sky-500 hover:text-sky-600"
                 >
                   {props?.lang?.signinLink}
                 </Link>

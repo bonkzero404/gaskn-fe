@@ -1,4 +1,3 @@
-import { AtSymbolIcon, LockClosedIcon } from "@heroicons/react/20/solid";
 import { Input } from "../../../../components/input";
 import { Button } from "../../../../components/button";
 import { LayoutAuth } from "../../../../components/layout/auth";
@@ -42,15 +41,7 @@ export function SignInComponent(props: SignInComponentProps) {
               type="text"
               autoComplete="email"
               placeholder="john.doe@example.com"
-              icon={(isError) => (
-                <AtSymbolIcon
-                  className={`h-5 w-5 ${
-                    isError
-                      ? "text-red-500 group-hover:text-red-400"
-                      : "text-blue-500 group-hover:text-blue-400"
-                  }`}
-                />
-              )}
+              iconString="AtSymbolIcon"
               className={errors.email ? "is-invalid" : ""}
               inputValidationRule={{ ...register("email") }}
               validationMessages={errors?.email?.message}
@@ -66,15 +57,7 @@ export function SignInComponent(props: SignInComponentProps) {
               name="password"
               type="password"
               autoComplete="current-password"
-              icon={(isError) => (
-                <LockClosedIcon
-                  className={`h-5 w-5 ${
-                    isError
-                      ? "text-red-500 group-hover:text-red-400"
-                      : "text-blue-500 group-hover:text-blue-400"
-                  }`}
-                />
-              )}
+              iconString="LockClosedIcon"
               eyePassword
               inputValidationRule={{ ...register("password") }}
               validationMessages={errors?.password?.message}
@@ -89,7 +72,7 @@ export function SignInComponent(props: SignInComponentProps) {
                 id="rememberme"
                 name="rememberme"
                 type="checkbox"
-                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                className="h-4 w-4 rounded border-gray-300 text-sky-500 focus:ring-blue-500"
                 defaultChecked={props.setValue.rememberme}
               />
               <label
@@ -103,7 +86,7 @@ export function SignInComponent(props: SignInComponentProps) {
             <div className="text-sm">
               <Link
                 href="/panel/forgot-password"
-                className="text-blue-600 hover:text-blue-500"
+                className="text-sky-500 hover:text-sky-600"
               >
                 {props?.lang?.forgotPass}
               </Link>
@@ -130,7 +113,7 @@ export function SignInComponent(props: SignInComponentProps) {
                 {props?.lang?.registerDesc}{" "}
                 <Link
                   href="/panel/signup"
-                  className="text-blue-600 hover:text-blue-500"
+                  className="text-sky-500 hover:text-sky-600"
                 >
                   {props?.lang?.signupLink}
                 </Link>

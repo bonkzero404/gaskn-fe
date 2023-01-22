@@ -4,11 +4,11 @@
 
 @layer components {
   #__next {
-    @apply h-full bg-gray-50;
+    @apply h-full bg-gray-200 text-gray-700;
   }
   html,
   body {
-    @apply h-full;
+    @apply h-full m-0 p-0 bg-gray-200;
     font-family: 'Roboto', cursive;
   }
 }

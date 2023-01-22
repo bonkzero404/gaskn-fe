@@ -14,7 +14,7 @@ export const LayoutPanel = (props: PanelLayoutProps) => {
           closeDrawer={() => setOpenDrawer(false)}
         />
 
-        <div className="relative bg-white flex-1 w-full max-[640px]:ml-0 overflow-auto h-screen">
+        <div className="relative bg-gray-200 flex-1 w-full max-[640px]:ml-0 overflow-auto h-screen">
           <Header
             title={props.titlePage}
             actionDrawer={() => setOpenDrawer(true)}
