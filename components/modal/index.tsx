@@ -31,13 +31,13 @@ export const Modal = (props: ModalProps) => {
               <Button
                 type="button"
                 backgroundColor={SolidColor.Gray}
-                label="Close"
+                label={props.closeLabel ? props.closeLabel : "Close"}
                 onClick={props.handleClose}
                 className="mr-2 min-w-[120px]"
               />
               <Button
                 type="button"
-                label="Save"
+                label={props.actionLabel ? props.actionLabel : "Save"}
                 onClick={props.handleAction}
                 className="min-w-[120px]"
               />

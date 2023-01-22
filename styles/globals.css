@@ -9,5 +9,6 @@
   html,
   body {
     @apply h-full;
+    font-family: 'Roboto', cursive;
   }
 }
