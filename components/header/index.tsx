@@ -1,9 +1,4 @@
-import {
-  Bars3Icon,
-  BellIcon,
-  Cog6ToothIcon,
-  EnvelopeIcon,
-} from "@heroicons/react/20/solid";
+import { Bars3Icon, BellIcon, EnvelopeIcon } from "@heroicons/react/20/solid";
 import { Avatar } from "../avatar";
 import { HeaderProps } from "./props";
 
