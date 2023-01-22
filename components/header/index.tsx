@@ -1,5 +1,13 @@
-import { Bars3Icon, BellIcon, EnvelopeIcon } from "@heroicons/react/20/solid";
+import {
+  Bars3Icon,
+  BellIcon,
+  FlagIcon,
+  LanguageIcon,
+} from "@heroicons/react/20/solid";
 import { Avatar } from "../avatar";
+import { Dropdown } from "../dropdown";
+import { MenuLang } from "./menu-dropdown/menu-lang";
+import { MenuProfile } from "./menu-dropdown/menu-profile";
 import { HeaderProps } from "./props";
 
 export const Header = (props: HeaderProps) => {
@@ -18,35 +26,47 @@ export const Header = (props: HeaderProps) => {
             {props.title}
           </label>
 
-          <ul className="flex flex-row list-none ml-auto">
+          <ul className="flex flex-row space-x-3 list-none ml-auto">
             <li className="nav-item">
-              <a
-                className="flex items-center text-xs uppercase font-bold leading-snug hover:text-sky-500 pt-1.5 px-2.5"
-                href="#pablo"
-              >
+              <div className="flex items-center justify-center text-xs uppercase font-bold leading-snug w-8 h-8 cursor-pointer bg-gray-100 rounded-full hover:bg-gray-200">
                 <BellIcon className="w-5 h-5" />
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="flex items-center text-xs uppercase font-bold leading-snug hover:text-sky-500 pt-1.5 px-2.5"
-                href="#pablo"
-              >
-                <EnvelopeIcon className="w-5 h-5" />
-              </a>
-            </li>
-            <li className="nav-item">
-              <div className="flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75 cursor-pointer sm:pl-2.5 md:pl-2.5 lg:pl-2.5 bg-gray-200 rounded-full">
-                <label className="max-[640px]:hidden mr-2 cursor-pointer">
-                  Janitra Panji
-                </label>
-                <Avatar
-                  name="Janitra Panji"
-                  maxCharacters={2}
-                  size={13}
-                  rounded
-                />
               </div>
+            </li>
+            <li className="nav-item max-[640px]:hidden sm:hidden md:block lg:block">
+              <Dropdown
+                popContent={<MenuLang />}
+                closeAfterClick
+                className="flex items-center justify-center text-xs uppercase font-bold leading-snug h-8 cursor-pointer bg-gray-100 rounded-full px-4 hover:bg-gray-200"
+                popClassName="absolute z-50 bg-white p-2 rounded shadow-md min-w-[180px] border border-gray-100 mt-1"
+                pos="bottom-center"
+              >
+                <>
+                  <FlagIcon className="w-5 h-5" />
+                  <label className="text-xs ml-2 cursor-pointer">ID</label>
+                </>
+              </Dropdown>
+            </li>
+            <li className="nav-item">
+              <Dropdown
+                popContent={<MenuProfile />}
+                closeAfterClick
+                className="flex items-center text-xs uppercase leading-snug cursor-pointer sm:pl-2.5 md:pl-2.5 lg:pl-2.5 bg-gray-100 rounded-full hover:bg-gray-200"
+                popClassName="absolute z-50 bg-white p-2 rounded right-0 shadow-md min-w-[180px] border border-gray-100 mt-1"
+                pos="bottom-right"
+              >
+                <>
+                  <label className="max-[640px]:hidden mr-2 cursor-pointer">
+                    Janitra Panji
+                  </label>
+                  <Avatar
+                    name="Janitra Panji"
+                    maxCharacters={2}
+                    size={13}
+                    rounded
+                    twBackground="bg-sky-500"
+                  />
+                </>
+              </Dropdown>
             </li>
           </ul>
         </div>
