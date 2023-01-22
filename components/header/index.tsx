@@ -1,4 +1,9 @@
-import { Bars3Icon, BellIcon, Cog6ToothIcon } from "@heroicons/react/20/solid";
+import {
+  Bars3Icon,
+  BellIcon,
+  Cog6ToothIcon,
+  EnvelopeIcon,
+} from "@heroicons/react/20/solid";
 import { Avatar } from "../avatar";
 import { HeaderProps } from "./props";
 
@@ -21,61 +26,35 @@ export const Header = (props: HeaderProps) => {
           <ul className="flex flex-row list-none ml-auto">
             <li className="nav-item">
               <a
-                className="flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75 mr-2"
+                className="flex items-center text-xs uppercase font-bold leading-snug hover:text-sky-500 pt-1.5 px-2.5"
                 href="#pablo"
               >
-                <BellIcon className="w-8 h-8" />
+                <BellIcon className="w-5 h-5" />
               </a>
             </li>
             <li className="nav-item">
               <a
-                className="flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75 mr-2"
+                className="flex items-center text-xs uppercase font-bold leading-snug hover:text-sky-500 pt-1.5 px-2.5"
                 href="#pablo"
               >
-                <Cog6ToothIcon className="w-8 h-8" />
+                <EnvelopeIcon className="w-5 h-5" />
               </a>
             </li>
             <li className="nav-item">
-              <a
-                className="flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75"
-                href="#pablo"
-              >
-                <Avatar name="John Item" maxCharacters={2} size={13} rounded />
-              </a>
+              <div className="flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75 cursor-pointer sm:pl-2.5 md:pl-2.5 lg:pl-2.5 bg-gray-200 rounded-full">
+                <label className="max-[640px]:hidden mr-2 cursor-pointer">
+                  Janitra Panji
+                </label>
+                <Avatar
+                  name="Janitra Panji"
+                  maxCharacters={2}
+                  size={13}
+                  rounded
+                />
+              </div>
             </li>
           </ul>
         </div>
-        {/* <div
-          className="lg:flex flex-grow items-center max-[640px]:hidden md:hidden sm:hidden"
-          id="example-navbar-warning"
-        >
-          <ul className="flex flex-col lg:flex-row list-none ml-auto">
-            <li className="nav-item">
-              <a
-                className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75"
-                href="#pablo"
-              >
-                EN
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75"
-                href="#pablo"
-              >
-                ID
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
-                className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug hover:opacity-75"
-                href="#pablo"
-              >
-                Setting
-              </a>
-            </li>
-          </ul>
-        </div> */}
       </div>
     </nav>
   );
