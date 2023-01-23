@@ -1,0 +1,3 @@
+{
+  "inlineFold.regex": "(class|className|)=(({(`|))|(['\"`]))(.*?)(\\2|(\\4)})"
+}
