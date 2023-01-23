@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { AvatarProps } from "./props";
 
 export const Avatar = (props: AvatarProps) => {
@@ -62,11 +62,15 @@ export const Avatar = (props: AvatarProps) => {
           <Image
             fill
             loader={props.image.url}
-            src={props.image.fallback as any}
+            src={props.image.fallback as StaticImageData}
             alt={createAcronym()}
           />
         ) : (
-          <Image fill src={props.image.path as any} alt={createAcronym()} />
+          <Image
+            fill
+            src={props.image.path as StaticImageData}
+            alt={createAcronym()}
+          />
         )
       ) : (
         createAcronym()

@@ -14,7 +14,7 @@ export function ReActivationComponent(props: SignInComponentProps) {
   const { email } = router.query;
   const formOptions = { resolver: yupResolver(ReActivationSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
-  const { errors }: any = formState;
+  const { errors } = formState;
 
   return (
     <LayoutAuth title={props?.lang?.titlePage}>

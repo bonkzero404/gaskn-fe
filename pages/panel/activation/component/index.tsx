@@ -16,7 +16,7 @@ export function ActivationComponent(props: SignInComponentProps) {
   const { email } = router.query;
   const formOptions = { resolver: yupResolver(ActivationSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
-  const { errors }: any = formState;
+  const { errors } = formState;
   const [visibleEmail, setVisibleEmail] = useState(true);
 
   useEffect(() => {

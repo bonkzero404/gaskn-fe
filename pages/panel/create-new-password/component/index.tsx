@@ -15,7 +15,7 @@ export function CreateNewPasswordComponent(props: SignInComponentProps) {
   const { email } = router.query;
   const formOptions = { resolver: yupResolver(CreateNewPasswordSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
-  const { errors }: any = formState;
+  const { errors } = formState;
   const [visibleEmail, setVisibleEmail] = useState(true);
 
   useEffect(() => {

@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
 import { BaseRepository } from "../../../shared/base-repository";
 import moment from "moment";
 import { AuthProviderProps } from "./props";
@@ -67,7 +66,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
               password: rememberForm.password,
             })
             .then(async (response) => {
-              const data = await (response as any).json();
+              const data = await response.json();
 
               if (data?.errors) {
                 removeCookie("auth");
@@ -100,7 +99,7 @@ export const AuthProvider = (props: AuthProviderProps) => {
             sessionCookie.token,
           )
           .then(async (response) => {
-            const data = await (response as any).json();
+            const data = await response.json();
 
             if (data?.errors) {
               removeCookie("auth");

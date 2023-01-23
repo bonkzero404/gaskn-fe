@@ -11,7 +11,7 @@ import { SignInComponentProps } from "./props";
 export function SignInComponent(props: SignInComponentProps) {
   const formOptions = { resolver: yupResolver(SignInSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
-  const { errors }: any = formState;
+  const { errors } = formState;
 
   return (
     <LayoutAuth title={props?.lang?.titlePage}>

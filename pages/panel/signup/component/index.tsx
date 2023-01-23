@@ -12,7 +12,7 @@ import { SolidColor } from "../../../../shared/color";
 export function SignUpComponent(props: SignUpComponentProps) {
   const formOptions = { resolver: yupResolver(SignUpSchema) };
   const { register, handleSubmit, formState } = useForm(formOptions);
-  const { errors }: any = formState;
+  const { errors } = formState;
 
   return (
     <LayoutAuth title={props?.lang?.titlePage}>

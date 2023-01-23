@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { DropdownProps } from "./props";
 
 export const Dropdown = (props: DropdownProps) => {
@@ -12,7 +12,7 @@ export const Dropdown = (props: DropdownProps) => {
   const [isDelayed, setIsDelayed] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
+    const handleClickOutside = (event: ChangeEvent<HTMLDivElement>) => {
       if (refPop.current && refPop.current.contains(event.target)) {
         if (props.closeAfterClick) {
           setShowBox(false);
@@ -25,9 +25,9 @@ export const Dropdown = (props: DropdownProps) => {
         }
       }
     };
-    document.addEventListener("click", handleClickOutside, true);
+    document.addEventListener("click", handleClickOutside as any, true);
     return () => {
-      document.removeEventListener("click", handleClickOutside, true);
+      document.removeEventListener("click", handleClickOutside as any, true);
     };
   }, [props.closeAfterClick, showBox]);
 
@@ -46,17 +46,26 @@ export const Dropdown = (props: DropdownProps) => {
 
     if (props.pos && props.pos === "bottom-center") {
       if (refContainer.current && showBox) {
-        const childAction: HTMLDivElement | any =
+        const childAction: HTMLDivElement | Element =
           refContainer.current.children[0];
-        const childPop: HTMLDivElement | any = refContainer.current.children[1];
+        const childPop: HTMLDivElement | Element =
+          refContainer.current.children[1];
 
-        if (childPop.offsetWidth > childAction.offsetWidth) {
+        if (
+          (childPop as HTMLDivElement).offsetWidth >
+          (childAction as HTMLDivElement).offsetWidth
+        ) {
           setPosition({
-            left: -(childPop.offsetWidth / 2 - childAction.offsetWidth / 2),
+            left: -(
+              (childPop as HTMLDivElement).offsetWidth / 2 -
+              (childAction as HTMLDivElement).offsetWidth / 2
+            ),
           });
         } else {
           setPosition({
-            left: childAction.offsetWidth / 2 - childPop.offsetWidth / 2,
+            left:
+              (childAction as HTMLDivElement).offsetWidth / 2 -
+              (childPop as HTMLDivElement).offsetWidth / 2,
           });
         }
       }

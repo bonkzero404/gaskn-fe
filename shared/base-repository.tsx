@@ -71,7 +71,7 @@ export class BaseRepository {
     data?: ObjectOrArray | undefined,
     token?: string,
     options?: RequestInit | undefined,
-  ): Promise<Response | unknown> {
+  ): Promise<Response> {
     return await this.SetDataSend(path, "PUT", data, token, options);
   }
 
@@ -80,7 +80,7 @@ export class BaseRepository {
     data?: ObjectOrArray | undefined,
     token?: string,
     options?: RequestInit | undefined,
-  ): Promise<Response | unknown> {
+  ): Promise<Response> {
     return await this.SetDataSend(path, "DELETE", data, token, options);
   }
 
@@ -89,7 +89,7 @@ export class BaseRepository {
     data?: ObjectOrArray | undefined,
     token?: string,
     options?: RequestInit | undefined,
-  ): Promise<Response | unknown> {
+  ): Promise<Response> {
     return await this.SetDataSend(path, "GET", data, token, options);
   }
 }

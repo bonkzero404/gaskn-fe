@@ -1,5 +1,10 @@
 import { HTMLInputTypeAttribute, KeyboardEventHandler } from "react";
-import { UseFormRegisterReturn } from "react-hook-form";
+import {
+  FieldError,
+  FieldErrorsImpl,
+  Merge,
+  UseFormRegisterReturn,
+} from "react-hook-form";
 import { SolidColor } from "../../shared/color";
 
 export interface InputProperties {
@@ -21,7 +26,10 @@ export interface InputProperties {
   focusBorderColor?: SolidColor | undefined;
   rounded?: string | undefined;
   inputValidationRule?: UseFormRegisterReturn;
-  validationMessages?: string | undefined;
+  validationMessages?:
+    | string
+    | FieldError
+    | Merge<FieldError, FieldErrorsImpl<any>>;
   defaultValue?: string | undefined;
   onKeyUp?: KeyboardEventHandler<HTMLInputElement>;
 }
