@@ -1,3 +1,6 @@
 {
-  "inlineFold.regex": "(class|className|)=(({(`|))|(['\"`]))(.*?)(\\2|(\\4)})"
+  "inlineFold.regex": "(class|className|)=(({(`|))|(['\"`]))(.*?)(\\2|(\\4)})",
+  "editor.codeActionsOnSave": {
+    "source.removeUnusedImports": true
+  }
 }
