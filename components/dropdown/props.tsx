@@ -1,5 +1,3 @@
-import { FocusEventHandler, MouseEventHandler } from "react";
-
 export interface DropdownProps {
   id?: string;
   children?: JSX.Element;

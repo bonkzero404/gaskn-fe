@@ -1,9 +1,4 @@
-import {
-  Bars3Icon,
-  BellIcon,
-  FlagIcon,
-  LanguageIcon,
-} from "@heroicons/react/20/solid";
+import { Bars3Icon, BellIcon, FlagIcon } from "@heroicons/react/20/solid";
 import { Avatar } from "../avatar";
 import { Dropdown } from "../dropdown";
 import { MenuLang } from "./menu-dropdown/menu-lang";
