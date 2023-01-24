@@ -5,6 +5,7 @@ import { AuthProviderProps } from "./props";
 import { removeCookie, useCookies } from "../../../shared/hook/cookie";
 import { useLocalStorage } from "usehooks-ts";
 import useDidMountEffect from "../../../shared/hook/mount";
+import AuthContext from "./context";
 
 export const AuthProvider = (props: AuthProviderProps) => {
   const [sessionCookie, SetCookie] = useCookies<{
@@ -37,7 +38,6 @@ export const AuthProvider = (props: AuthProviderProps) => {
     }
 
     if (router.pathname && sessionCookie && sessionCookie.token !== "") {
-      console.log("TAEEEE");
       const tokenExpires = moment.unix(sessionCookie.expires as number);
       const dateNow = moment().valueOf();
       const subtractExpires = moment
@@ -123,5 +123,11 @@ export const AuthProvider = (props: AuthProviderProps) => {
     }
   }, [props]);
 
-  return <>{props.children}</>;
+  return (
+    <AuthContext.Provider
+      value={{ token: sessionCookie.token ? sessionCookie.token : "" }}
+    >
+      {props.children}
+    </AuthContext.Provider>
+  );
 };

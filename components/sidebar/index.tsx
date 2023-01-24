@@ -1,18 +1,20 @@
 import { ChartPieIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
-import { Avatar } from "../avatar";
+import { useContext, useEffect } from "react";
+import AuthContext from "../provider/auth/context";
 import { SidebarProps } from "./props";
 
 export const SideBar = (props: SidebarProps) => {
+  const authCtx = useContext(AuthContext);
+
   // @ts-ignore
   const logoApp = ({ src }) => {
     return `https://tailwindui.com/img/logos/${src}?color=indigo&shade=600`;
   };
 
-  // @ts-ignore
-  const img = ({ src }) => {
-    return `https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.jpg`;
-  };
+  useEffect(() => {
+    console.log("TOKEN", authCtx.token);
+  }, [authCtx.token]);
 
   return (
     <>
