@@ -1,11 +1,19 @@
-import { ChartPieIcon, XMarkIcon } from "@heroicons/react/20/solid";
+import { XMarkIcon } from "@heroicons/react/20/solid";
+import * as Icon from "@heroicons/react/20/solid";
 import Image from "next/image";
-import { useContext, useEffect } from "react";
+import Link from "next/link";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../provider/auth/context";
 import { SidebarProps } from "./props";
+import { Repository } from "./repository";
+import { useRouter } from "next/router";
 
 export const SideBar = (props: SidebarProps) => {
   const authCtx = useContext(AuthContext);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [dataMenu, setDataMenu] = useState<Array<Object>>([]);
+  const repository = new Repository();
+  const router = useRouter();
 
   // @ts-ignore
   const logoApp = ({ src }) => {
@@ -13,8 +21,58 @@ export const SideBar = (props: SidebarProps) => {
   };
 
   useEffect(() => {
-    console.log("TOKEN", authCtx.token);
+    if (authCtx.token !== "") {
+      setLoading(true);
+      repository
+        .getListMenu(authCtx.token)
+        .then((menu) => {
+          if (menu.errors) {
+            setDataMenu([]);
+          } else {
+            setDataMenu(menu.data);
+          }
+
+          setLoading(false);
+        })
+        .catch((_err) => {
+          setLoading(false);
+          setDataMenu([]);
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authCtx.token]);
+
+  const renderMenu = (child: any, pad: number): JSX.Element => {
+    if (loading) {
+      return <label>Loading...</label>;
+    }
+
+    if (!loading && child.length > 0) {
+      return (
+        <ul className="py-1 space-y-2">
+          {child.map((item: any, index: number) => {
+            const Icn = (Icon as any)[item.menu_icon];
+            return (
+              <li key={item.parent_id + "-" + index}>
+                <Link
+                  href={item.menu_url}
+                  className={`flex items-center p-2 text-base font-normal hover:text-white rounded-lg dark:text-gray hover:bg-gray-100 dark:hover:bg-sky-400 ${
+                    router.asPath === item.menu_url && "bg-sky-400"
+                  } pl-${pad}`}
+                >
+                  <Icn className="w-5 h-5" />
+                  <span className="ml-3">{item.menu_name}</span>
+                </Link>
+                {item.children !== null && renderMenu(item.children, pad + 10)}
+              </li>
+            );
+          })}
+        </ul>
+      );
+    }
+
+    return <label>Something went wrong</label>;
+  };
 
   return (
     <>
@@ -56,19 +114,7 @@ export const SideBar = (props: SidebarProps) => {
               </span>
             </a>
           </div>
-          <div className="px-3 py-4 ">
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  className="flex items-center p-2 text-base font-normal hover:text-white rounded-lg dark:text-gray hover:bg-gray-100 dark:hover:bg-sky-400"
-                >
-                  <ChartPieIcon className="w-7 h-7" />
-                  <span className="ml-3">Dashboard</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+          <div className="px-3 py-4 ">{renderMenu(dataMenu, 0)}</div>
         </div>
       </aside>
     </>
