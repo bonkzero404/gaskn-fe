@@ -5,5 +5,6 @@ export interface DropdownProps {
   className?: string;
   popClassName?: string;
   closeAfterClick?: boolean;
+  closeAfterAction?: boolean;
   pos?: "bottom-left" | "bottom-center" | "bottom-right";
 }

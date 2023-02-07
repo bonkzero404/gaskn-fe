@@ -1,11 +1,23 @@
 import { Bars3Icon, BellIcon, FlagIcon } from "@heroicons/react/20/solid";
+import { useContext, useEffect, useState } from "react";
 import { Avatar } from "../avatar";
 import { Dropdown } from "../dropdown";
+import LangContext from "../provider/lang/context";
 import { MenuLang } from "./menu-dropdown/menu-lang";
 import { MenuProfile } from "./menu-dropdown/menu-profile";
 import { HeaderProps } from "./props";
 
 export const Header = (props: HeaderProps) => {
+  const langCtx = useContext(LangContext);
+  const [lang, setLang] = useState("");
+  const [langActionUsed, setLangActionUsed] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (lang !== "" || langCtx.lang !== "") {
+      setLang(langCtx.lang);
+    }
+  }, [lang, langCtx.lang]);
+
   return (
     <nav className="fixed z-40 flex flex-wrap items-center justify-between px-0 py-3 text-gray-700 bg-white border-b border-white mb-3 shadow-md right-0 max-[640px]:left-0 lg:left-64 md:left-64 sm:left-64 min-h-[56.6px]">
       <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
@@ -30,14 +42,14 @@ export const Header = (props: HeaderProps) => {
             <li className="nav-item max-[640px]:hidden sm:hidden md:block lg:block">
               <Dropdown
                 popContent={<MenuLang />}
-                closeAfterClick
                 className="flex items-center justify-center text-xs uppercase font-bold leading-snug h-8 cursor-pointer bg-gray-100 rounded-full px-4 hover:bg-gray-200"
                 popClassName="absolute z-50 bg-white p-2 rounded shadow-md min-w-[180px] border border-gray-100 mt-1"
                 pos="bottom-center"
+                closeAfterClick
               >
                 <>
                   <FlagIcon className="w-5 h-5" />
-                  <label className="text-xs ml-2 cursor-pointer">ID</label>
+                  <label className="text-xs ml-2 cursor-pointer">{lang}</label>
                 </>
               </Dropdown>
             </li>

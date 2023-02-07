@@ -14,8 +14,10 @@ export const Dropdown = (props: DropdownProps) => {
   useEffect(() => {
     const handleClickOutside = (event: ChangeEvent<HTMLDivElement>) => {
       if (refPop.current && refPop.current.contains(event.target)) {
-        if (props.closeAfterClick) {
-          setShowBox(false);
+        if (props.closeAfterClick || props.closeAfterAction) {
+          setTimeout(() => {
+            setShowBox(false);
+          }, 10);
         }
       }
 
@@ -29,7 +31,7 @@ export const Dropdown = (props: DropdownProps) => {
     return () => {
       document.removeEventListener("click", handleClickOutside as any, true);
     };
-  }, [props.closeAfterClick, showBox]);
+  }, [props.closeAfterAction, props.closeAfterClick, showBox]);
 
   useEffect(() => {
     if (props.pos && props.pos === "bottom-left") {

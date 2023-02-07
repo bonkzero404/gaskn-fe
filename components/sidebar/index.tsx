@@ -7,9 +7,11 @@ import AuthContext from "../provider/auth/context";
 import { SidebarProps } from "./props";
 import { Repository } from "./repository";
 import { useRouter } from "next/router";
+import LangContext from "../provider/lang/context";
 
 export const SideBar = (props: SidebarProps) => {
   const authCtx = useContext(AuthContext);
+  const langCtx = useContext(LangContext);
   const [loading, setLoading] = useState<boolean>(true);
   const [dataMenu, setDataMenu] = useState<Array<Object>>([]);
   const repository = new Repository();
@@ -21,7 +23,7 @@ export const SideBar = (props: SidebarProps) => {
   };
 
   useEffect(() => {
-    if (authCtx.token !== "") {
+    if (authCtx.token !== "" && langCtx.lang) {
       setLoading(true);
       repository
         .getListMenu(authCtx.token)
@@ -40,7 +42,7 @@ export const SideBar = (props: SidebarProps) => {
         });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authCtx.token]);
+  }, [authCtx.token, langCtx.lang]);
 
   const renderMenu = (child: any, pad: number): JSX.Element => {
     if (loading) {
